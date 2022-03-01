@@ -1,3 +1,5 @@
+import DemoFooter from 'components/Footers/DemoFooter'
+import Footer from 'components/Footers/DemoFooter'
 import LandingPageHeader from 'components/Headers/LandingPageHeader'
 import ProfilePageHeader from 'components/Headers/ProfilePageHeader'
 import IndexNavbar from 'components/Navbars/IndexNavbar'
@@ -60,8 +62,40 @@ export default function Service() {
         <p style={{fontSize:'20px' ,fontStyle:'oblique'}}>si vous avez besoin de transférer vos colis vers une autre ville ou même dans votre ville tout en respectant les termes de sécurité et rapidité vous est dans le meilleur endroit</p>
         </Col>
     </Row>
+    <h1 style={{borderBottom:'2px solid rgba(0,0,0,0.3)', paddingBottom:'15px' , marginBottom:'30px'}}>Avis Clients</h1>
+    <Row>
+      <Col>
+      <h5 style={{fontSize:'20px'}}><img
+                  alt="..."
+                  className="img-circle img-no-padding img-responsive"
+                  src={require("assets/img/saber.jpg").default}
+                  width="100"
+                />      Saber Rebai <br/></h5>
+       un site magnifique et surtout la bonne organisation, et la bonne qualité de ses services Je suis un fan de ce site.
+      </Col>
+      <Col>
+      <h5 style={{fontSize:'20px'}}><img
+                  alt="..."
+                  className="img-circle img-no-padding img-responsive"
+                  src={require("assets/img/faces/kaci-baum-2.jpg").default}
+                  width="100"
+                />      Amal Sassi <br/></h5>
+                
+                vraiment un site magique Je remercie toute l'équipe qui a participé à cette réussite.
+      </Col>
+      <Col>
+      <h5 style={{fontSize:'20px'}}><img
+                  alt="..."
+                  className="img-circle img-no-padding img-responsive"
+                  src={require("assets/img/balti.jpg").default}
+                  width="100"
+                />      Mohamed Salih Balti <br/></h5>
+       un site magnifique et surtout la bonne organisation, et la bonne qualité de ses services Je suis un fan de ce site.
+      </Col>
+    </Row>
     </Container>
     <br/><br/>
+    <DemoFooter/>
     </div>
   )
 }
