@@ -94,7 +94,7 @@ export default function Service() {
       </Col>
     </Row>
     </Container>
-    <br/><br/>
+    <br/><br/><br/>
     <DemoFooter/>
     </div>
   )
