@@ -29,7 +29,7 @@ import DemoFooter from "components/Footers/DemoFooter.js";
 import SectionButtons from "views/index-sections/SectionButtons.js";
 import RegisterPage from "components/Body/RegisterPage";
 import Forml from "components/Body/Forml";
-/*import SectionNavbars from "views/index-sections/SectionNavbars.js";
+import SectionNavbars from "views/index-sections/SectionNavbars.js";
 import SectionNavigation from "views/index-sections/SectionNavigation.js";
 import SectionProgress from "views/index-sections/SectionProgress.js";
 import SectionNotifications from "views/index-sections/SectionNotifications.js";
@@ -41,7 +41,7 @@ import SectionDark from "views/index-sections/SectionDark.js";
 import SectionLogin from "views/index-sections/SectionLogin.js";
 import SectionExamples from "views/index-sections/SectionExamples.js";
 import SectionDownload from "views/index-sections/SectionDownload.js";
-<SectionButtons />
+/*<SectionButtons />
         <SectionNavbars />
         <SectionNavigation />
         <SectionProgress />
@@ -70,7 +70,19 @@ function Index() {
       <IndexNavbar />
    <IndexHeader/>
   <div className="main">
-        
+  <SectionNavbars />
+        <SectionNavigation />
+        <SectionProgress />
+        <SectionNotifications />
+        <SectionTypography />
+        <SectionJavaScript />
+        <SectionCarousel />
+        <SectionNucleoIcons />
+        <SectionDark />
+        <SectionLogin />
+        <SectionExamples />
+        <SectionDownload />
+        <SectionButtons />
      </div>
      
     </>

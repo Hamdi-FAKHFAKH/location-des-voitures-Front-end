@@ -28,6 +28,7 @@ import "assets/demo/demo.css?v=1.3.0";
 import Index from "views/Index.js";
 import Forml from "components/Body/Forml";
 import RegisterPage from "components/Body/RegisterPage";
+import Service from "components/Body/Service";
 /*import NucleoIcons from "views/NucleoIcons.js";
 import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
@@ -55,6 +56,7 @@ ReactDOM.render(
       <Route path="/index" render={(props) => <Index {...props} />} />
       <Route path="/inscrit" render={(props) => <Forml {...props} />}/>
       <Route path="/connexion" render={(props) => <RegisterPage {...props} />}/>
+      <Route path="/service" render={(props) => <Service {...props} />}/>
       <Redirect to="/index" />
 
     </Switch>

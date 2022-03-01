@@ -17,6 +17,7 @@
 
 */
 import React from "react";
+import { Container } from "reactstrap";
 
 // reactstrap components
 
@@ -44,13 +45,17 @@ function ProfilePageHeader() {
       <div
         style={{
           backgroundImage:
-            "url(" + require("assets/img/fabio-mangione.jpg").default + ")",
+            "url(" + require("assets/img/5.jpg").default + ")",
         }}
-        className="page-header page-header-xs"
+        className="page-header page-header-small"
         data-parallax={true}
         ref={pageHeader}
       >
         <div className="filter" />
+        <Container>
+        <h1 className="presentation-title" style={{fontSize:80,marginLeft:"-140px" }}>Service</h1>
+        
+          </Container>
       </div>
     </>
   );
