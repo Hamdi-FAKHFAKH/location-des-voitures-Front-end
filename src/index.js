@@ -19,20 +19,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
-
+import FormCountClient from "components/Body/FormCountClient";
 // styles
 import "bootstrap/scss/bootstrap.scss";
 import "assets/scss/paper-kit.scss?v=1.3.0";
 import "assets/demo/demo.css?v=1.3.0";
 // pages
 import Index from "views/Index.js";
-import Forml from "components/Body/Forml";
-import RegisterPage from "components/Body/RegisterPage";
+import Connexion from "components/Body/Connexion";
 import Service from "components/Body/Service";
+import FormEntrepriser from "components/Body/FormEntrepriser";
 /*import NucleoIcons from "views/NucleoIcons.js";
 import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
-import RegisterPage from "views/examples/RegisterPage.js";
+
 // others
 /*<Route
 path="/nucleo-icons"
@@ -48,15 +48,15 @@ render={(props) => <ProfilePage {...props} />}
 />
 <Route
 path="/register-page"
-render={(props) => <RegisterPage {...props} />}
 />*/
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/index" render={(props) => <Index {...props} />} />
-      <Route path="/inscrit" render={(props) => <Forml {...props} />}/>
-      <Route path="/connexion" render={(props) => <RegisterPage {...props} />}/>
+      <Route path="/inscrit" render={(props) => <FormCountClient {...props} />}/>
+      <Route path="/connexion" render={(props) => <Connexion {...props} />}/>
       <Route path="/service" render={(props) => <Service {...props} />}/>
+      <Route path="/entreprise" render={(props) => <FormEntrepriser {...props} />}/>
       <Redirect to="/index" />
 
     </Switch>

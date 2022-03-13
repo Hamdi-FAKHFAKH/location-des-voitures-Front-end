@@ -1,0 +1,34 @@
+.icon:after {
+    content: "";
+    width: 0.8em;
+    height: 0.8em;
+    margin-left: 0.1em;
+    display: inline-block;
+    background-size: cover;
+}
+.icon.hidden {
+    display: inline;
+    width: 0.8em;
+    text-indent: -7777px;
+}
+.icon.hidden:before {
+ 
+display: none;
+    
+}
+.icon.hidden:after {
+    content: "";
+    width: 0.8em;
+    height: 0.8em;
+    display: inline-block;
+    background-size: cover;
+}
+
+.icon.star:after,
+.icon.star:before {
+    background-image:  url('../img/etoile.png');
+}
+.icon.star2:after,
+.icon.star2:before {
+    background-image:  url('../img/etoile2.png');
+}

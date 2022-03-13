@@ -1,3 +1,0 @@
-symfony console make:controller nom_de_controlleur //crée un controlleur
-symfony server:start //lancer l'app
-symfony new mon_projet --webapp // crée une application symfony
