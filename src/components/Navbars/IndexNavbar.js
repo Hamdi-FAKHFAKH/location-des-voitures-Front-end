@@ -1,19 +1,16 @@
-//import img from "C:/Users/hamdi/OneDrive/Bureau/mini-projet/src/assets/img/logo.jpg";
 import React from "react";
 // nodejs library that concatenates strings
 import classnames from "classnames";
 // reactstrap components
 import {
-  Button,
   Collapse,
   NavbarBrand,
   Navbar,
   NavItem,
-  NavLink,
+  NavLink,  
   Nav,
   Container,
 } from "reactstrap";
-
 function IndexNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [navbarCollapse, setNavbarCollapse] = React.useState(false);
@@ -51,7 +48,6 @@ function IndexNavbar() {
           <NavbarBrand
             data-placement="bottom"
             href="/index"
-            target="_blank"
             title="Coded by Creative Tim"
           >
             Renting Car 
@@ -77,8 +73,9 @@ function IndexNavbar() {
           <Nav navbar>
             <NavItem>
               <NavLink
+              
                 data-placement="bottom"
-                href=""
+                to="#"
                 target="_blank"
                 title="Follow us on Twitter"
               >
@@ -88,7 +85,7 @@ function IndexNavbar() {
             </NavItem>
             <NavItem>
               <NavLink
-                data-placement="bottom"
+               data-placement="bottom"
                 href="https://www.facebook.com/hamdi.fakhfakh.98/"
                 target="_blank"
                 title="Like us on Facebook"
@@ -120,13 +117,13 @@ function IndexNavbar() {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/index">Home </NavLink>
+            <NavLink href='/index'>Home</NavLink>
             </NavItem>
             <NavItem>
               <NavLink to="">About Us </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/service">Services </NavLink>
+            <NavLink href="/service">Services</NavLink>
             </NavItem>
             <NavItem>
               <NavLink to="">Contact</NavLink>
@@ -135,22 +132,29 @@ function IndexNavbar() {
               <NavLink
                 data-placement="bottom"
                 href="/connexion"
-                title="connecter "
+                title="connecter a votre espace client"
               >
                 <i className="fa fa-sign-in" aria-hidden="true"/>
-                <p className="d-lg-none">Facebook</p>
+                <p className="d-lg-none">Connecter</p>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink
-                data-placement="bottom"
+              <NavLink  data-placement="bottom"
                 href='/inscrit'
-                title="crée un nouveau compte "
-              >
+                title="crée un nouveau compte client ">
                 <i className="fa fa-user-plus" aria-hidden="true"/>
-                <p className="d-lg-none">Facebook</p>
+                <p className="d-lg-none" >Crée un compte</p>
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink  data-placement="bottom"
+                href='/entreprise'
+                title="envoyer une demande de poster des services ">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <p className="d-lg-none" > Poster une Demande </p>
+              </NavLink>
+            </NavItem>
+            
           </Nav>
         </Collapse>
       </Container>

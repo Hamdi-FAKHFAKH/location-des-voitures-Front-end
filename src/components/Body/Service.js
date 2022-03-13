@@ -1,16 +1,16 @@
-import DemoFooter from 'components/Footers/DemoFooter'
-import Footer from 'components/Footers/DemoFooter'
-import LandingPageHeader from 'components/Headers/LandingPageHeader'
-import ProfilePageHeader from 'components/Headers/ProfilePageHeader'
+import Footer from 'components/Footers/Footer'
+import ServicePageHeader from 'components/Headers/ServicePageHeader'
 import IndexNavbar from 'components/Navbars/IndexNavbar'
 import React from 'react'
 import { Col, Container, Row } from 'reactstrap'
-import SectionButtons from 'views/index-sections/SectionButtons'
 
 export default function Service() {
   return (
       
-    <div><IndexNavbar/><ProfilePageHeader/>
+    <div style={{
+      backgroundImage:
+        "url(" + require("assets/img/back2.jpg").default + ")",
+    }}><IndexNavbar/><ServicePageHeader/>
     <Container >
     <h1 className='Header 1' style={{marginTop:'100px'}}>
      Notre service
@@ -95,7 +95,7 @@ export default function Service() {
     </Row>
     </Container>
     <br/><br/><br/>
-    <DemoFooter/>
+    <Footer/>
     </div>
   )
 }
