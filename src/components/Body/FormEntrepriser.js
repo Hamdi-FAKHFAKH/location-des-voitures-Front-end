@@ -54,7 +54,7 @@ export default function FormEntrepriser() {
                             </InputGroup>
                             <br/>
                             <InputGroup>
-                                <Input placeholder="Email" type="text" />
+                                <Input placeholder="Email" type="email" />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-envelope-o" />

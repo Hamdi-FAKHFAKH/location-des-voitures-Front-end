@@ -7,10 +7,9 @@ import { Col, Container, Row } from 'reactstrap'
 export default function Service() {
   return (
       
-    <div style={{
-      backgroundImage:
-        "url(" + require("assets/img/back2.jpg").default + ")",
-    }}><IndexNavbar/><ServicePageHeader/>
+    <div style={{backgroundColor:'#C9D6DF'}}>
+      <IndexNavbar/>
+      <ServicePageHeader/>
     <Container >
     <h1 className='Header 1' style={{marginTop:'100px'}}>
      Notre service

@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Paper Kit React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-kit-react
-
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/paper-kit-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import { Container } from "reactstrap";
 
@@ -23,7 +5,7 @@ import { Container } from "reactstrap";
 
 // core components
 
-function ServicePageHeader() {
+function ContactHeader() {
   let pageHeader = React.createRef();
 
   React.useEffect(() => {
@@ -45,7 +27,7 @@ function ServicePageHeader() {
       <div
         style={{
           backgroundImage:
-            "url(" + require("assets/img/BMW.jpg").default + ")",
+            "url(" + require("assets/img/bmw3.jpg").default + ")",
         }}
         className="page-header page-header-small"
         data-parallax={true}
@@ -54,12 +36,12 @@ function ServicePageHeader() {
      <div className="filter" />
         <Container>
           <br/>
-        <h1  style={{fontSize:80,marginLeft:"-140px",fontWeight:"bold",color:'white', marginTop:'156px'}}>Service</h1>
-        
+        <h1  style={{fontSize:80,marginLeft:"-160px",fontWeight:"bold",color:'white', marginTop:'156px',marginBottom:'200px'}}>Contact</h1>
+        <br/>
           </Container>
       </div>
     </>
   );
 }
 
-export default ServicePageHeader;
+export default ContactHeader;

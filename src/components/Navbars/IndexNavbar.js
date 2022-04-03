@@ -126,7 +126,7 @@ function IndexNavbar() {
             <NavLink href="/service">Services</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="">Contact</NavLink>
+              <NavLink href="/contact">Contact</NavLink>
             </NavItem>
             <NavItem>
               <NavLink

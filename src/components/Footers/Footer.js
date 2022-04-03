@@ -4,7 +4,7 @@ import React from "react";
 import { Row, Container } from "reactstrap";
 function Footer() {
   return (
-    <footer className="footer footer-black footer-white">
+    <footer className="footer footer-black footer-white" style={{backgroundColor:'#C9D6DF'}}>
       <Container>
         <Row>
           <nav className="footer-nav">

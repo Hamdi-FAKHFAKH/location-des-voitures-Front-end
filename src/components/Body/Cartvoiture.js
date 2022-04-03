@@ -13,7 +13,7 @@ export default function ({nom,prix,score,desc,img}) {
                     i<=score?<span class="icon star hidden"></span>:<span class="icon star2 hidden"></span>)}
                     </h6><hr style={{borderTop: '3px solid #b19540',borderRadius:'5px',width:'300px',margin:'auto' ,marginBottom:'10px'}}></hr>
                     <p style={{borderTop:'1px solid marron',padding:'5px'}}>{desc}</p>
-                <Button> Rent</Button>
+                <Button> Louer </Button>
                 </Card>
                     </Col>
   )

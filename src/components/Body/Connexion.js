@@ -47,7 +47,7 @@ function Connexion() {
           <Row>
             <Col className="ml-auto mr-auto" lg="4">
               <Card className="card-register ml-auto mr-auto"  style={{backgroundColor:'rgba(100, 119, 126,0.6)'}}>
-                <h3 className="title mx-auto">Welcome</h3>
+                <h3 className="title mx-auto">Bienvenue</h3>
                 <div className="social-line text-center">
                   <Button
                     className="btn-neutral btn-just-icon mr-1"
@@ -79,8 +79,8 @@ function Connexion() {
                   <Input placeholder="Pseudo" type="text" />
                   <label>Password</label>
                   <Input placeholder="Password" type="password" />
-                  <Button block className="btn-round"  color="dark">
-                    Register
+                  <Button block className="btn-round"  color="dark"> 
+                  S'inscrire
                   </Button>
                 </Form>
                 <div className="forgot">
@@ -90,7 +90,7 @@ function Connexion() {
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
                   >
-                    Forgot password?
+                    Mot de Passe Oubliée ?
                   </Button>
                 </div>
               </Card>

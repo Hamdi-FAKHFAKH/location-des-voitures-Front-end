@@ -64,7 +64,7 @@ export default function FormCountClient() {
                             </InputGroup>
                             <br/>
                             <InputGroup>
-                                <Input placeholder="Email" type="text" />
+                                <Input placeholder="Email" type="email" />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-envelope-o" />
@@ -91,7 +91,7 @@ export default function FormCountClient() {
                             </InputGroup>
                             <br/> 
                             <InputGroup>
-                                <Input placeholder="Date de Naissance " type="date" onFocus={(e)=>e.target.type = 'date'} onBlur={(e)=>e.target.type = 'text'} />
+                                <Input placeholder="Date de Naissance " type="text" onFocus={(e)=>e.target.type = 'date'} onBlur={(e)=>e.target.type = 'text'} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-calendar" />
