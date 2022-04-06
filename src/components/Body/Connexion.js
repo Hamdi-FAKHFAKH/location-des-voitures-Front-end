@@ -17,7 +17,7 @@
 
 */
 import IndexNavbar from "components/Navbars/IndexNavbar";
-import React from "react";
+import React, { useState } from "react";
 
 // reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
@@ -25,6 +25,11 @@ import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
 // core components
 
 function Connexion() {
+
+  localStorage.setItem("auth", false);
+  const  [client , setClient] = useState({});
+
+
   document.documentElement.classList.remove("nav-open");
   React.useEffect(() => {
     document.body.classList.add("register-page");
@@ -32,6 +37,37 @@ function Connexion() {
       document.body.classList.remove("register-page");
     };
   });
+
+  const signIn = (e) => {
+    e.preventDefault();        
+    const requestOptions = {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(client)
+    };
+    fetch('http://localhost:3000/api/client/signIn', requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      console.log("data: ",data)
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("auth", true);
+      var date = new Date();
+      date.setTime(date.getTime() + (3*24*60*60*1000));
+      document.cookie = `userId=${data.clientId}; expires=${date.toUTCString()};`;
+      document.cookie = `token=${data.token}; expires=${date.toUTCString()};`;
+      // store.dispatch( signIn() )
+      // console.log("store: ",store.getState())
+      window.location.href = "http://localhost:3001/index";
+
+      // setToken(data.token);
+      // setUserId(data.clientId);
+    })
+    .catch(err => console.error(err));
+    }
+
   return (
     <>
     <IndexNavbar/>
@@ -74,11 +110,11 @@ function Connexion() {
                     <i className="fa fa-twitter" />
                   </Button>
                 </div>
-                <Form className="register-form">
+                <Form className="register-form" onSubmit={ signIn }>
                   <label>Pseudo</label>
-                  <Input placeholder="Pseudo" type="text" />
+                  <Input placeholder="Pseudo" type="text" onChange={e => setClient( {...client ,Email: e.target.value} )} />
                   <label>Password</label>
-                  <Input placeholder="Password" type="password" />
+                  <Input placeholder="Password" type="password" onChange={e => setClient( {...client ,motDePasse: e.target.value} )} />
                   <Button block className="btn-round"  color="dark"> 
                   S'inscrire
                   </Button>
