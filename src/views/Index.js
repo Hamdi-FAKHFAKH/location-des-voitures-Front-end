@@ -4,6 +4,7 @@ import IndexHeader from "components/Headers/IndexHeader.js";
 import Cartvoiture from "components/Body/Cartvoiture";
 import { Container, Row } from "reactstrap";
 import {liste} from '../assets/data/listcar'
+import Footer from "components/Footers/Footer";
 function Index() {
   document.documentElement.classList.remove("nav-open");
   React.useEffect(() => {
@@ -15,7 +16,9 @@ function Index() {
   
   return (
     <>
-      <IndexNavbar />
+  <div className='imageDeFond'></div>
+  <div className='contenu' style={{backgroundColor:'rgba(255,255,255,0.78)'}}>
+  <IndexNavbar />
    <IndexHeader/>
   <div className="main">
     <Container style={{marginTop:'40px'}}>
@@ -26,7 +29,8 @@ function Index() {
   </Row>
   </Container>
      </div>
-   
+     <Footer/>
+  </div>
     </>
   );
 }

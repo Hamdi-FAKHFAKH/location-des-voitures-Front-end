@@ -1,0 +1,32 @@
+.imageDeFond {
+    /* La position est fixée en haut à gauche, en arrière-plan de la page */
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    /* On indique l'image de fond et les dimensions qu'elle occupe */
+    display: block;
+    background-image:
+    url('../img/33.jpg');
+    width: 1600px;
+    height:1000px;
+    /* On applique le filtre CSS3 pour flouter l'image (avec ici les variantes pour les différents moteurs de rendu) */
+    /* Safari */
+    -webkit-filter: blur(10px);
+    /* Firefox */
+    -moz-filter: blur(10px);
+    /* Opera */
+    -o-filter: blur(10px);
+    /* Internet Explorer */
+    -ms-filter: blur(10px);
+    /* Filtre de floutage CSS3 standard */
+    filter: blur(10px);
+    }
+    .contenu {
+    /* Le contenu est fixé en haut de la page */
+    position: relative;
+    left: 0;
+    right: 0;
+    /* Il est mis au premier plan */
+    z-index: 9999;
+    }
