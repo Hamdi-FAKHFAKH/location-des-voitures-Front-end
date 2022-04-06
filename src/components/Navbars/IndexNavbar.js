@@ -41,6 +41,36 @@ function IndexNavbar() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
   });
+
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function signOut(){
+    setCookie('userId', '');
+    setCookie('token', '');
+    window.location.assign('http://localhost:3001/connection');
+  }
+
   return (
     <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
       <Container>
@@ -126,26 +156,41 @@ function IndexNavbar() {
             <NavLink href="/service">Services</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/contact">Contact</NavLink>
+                      <NavLink href="/contact">Contact</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink
-                data-placement="bottom"
-                href="/connexion"
-                title="connecter a votre espace client"
-              >
-                <i className="fa fa-sign-in" aria-hidden="true"/>
-                <p className="d-lg-none">Connecter</p>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink  data-placement="bottom"
-                href='/inscrit'
-                title="crée un nouveau compte client ">
-                <i className="fa fa-user-plus" aria-hidden="true"/>
-                <p className="d-lg-none" >Crée un compte</p>
-              </NavLink>
-            </NavItem>
+            {
+              (!getCookie('userId') || getCookie('userId') == 'null' || getCookie('userId') == 'undefined')?  
+               <>
+                    <NavItem>
+                      <NavLink
+                        data-placement="bottom"
+                        href="/connexion"
+                        title="connecter a votre espace client"
+                      >
+                        <i className="fa fa-sign-in" aria-hidden="true"/>
+                        <p className="d-lg-none">Connecter</p>
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink  data-placement="bottom"
+                        href='/inscrit'
+                        title="crée un nouveau compte client ">
+                        <i className="fa fa-user-plus" aria-hidden="true"/>
+                        <p className="d-lg-none" >créer un compte</p>
+                      </NavLink>
+                    </NavItem>
+                </> : <>
+                  <NavItem onClick={ signOut }>
+                      <NavLink  data-placement="bottom"
+                        href='/inscription'
+                        title="désinscription ">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <p className="d-lg-none" >se déconnecter de votre compte</p>
+                      </NavLink>
+                    </NavItem>
+                </>
+            
+            }
             <NavItem>
               <NavLink  data-placement="bottom"
                 href='/entreprise'
