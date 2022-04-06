@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../assets/css/icons.css'
-import { Button, Card, Col } from 'reactstrap'
+import { Button, Card, Col, Form } from 'reactstrap'
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function ({nom,prix,score,desc,img}) {
   return (   
@@ -13,7 +13,16 @@ export default function ({nom,prix,score,desc,img}) {
                     i<=score?<span class="icon star hidden"></span>:<span class="icon star2 hidden"></span>)}
                     </h6><hr style={{borderTop: '3px solid #b19540',borderRadius:'5px',width:'300px',margin:'auto' ,marginBottom:'10px'}}></hr>
                     <p style={{borderTop:'1px solid marron',padding:'5px'}}>{desc}</p>
-                <Button> Louer </Button>
+                    <Form>
+                    <input type='hidden' name='nom' value={nom}/>
+                    <input type='hidden' name='prix' value={prix}/>
+                    <input type='hidden' name='score' value={score}/>
+                    <input type='hidden' name='desc' value={desc}/>
+                    <input type='hidden' name='img' value={img}/>
+                    <Button type='submit' style={{width:'350px'}}> Louer </Button>
+                    </Form>
+                    
+                
                 </Card>
                     </Col>
   )
