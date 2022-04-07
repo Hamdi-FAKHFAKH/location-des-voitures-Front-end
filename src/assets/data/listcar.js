@@ -19,4 +19,27 @@ prix:'70DT',
 score:'4',
 desc:'une couleur fraîche que vous ne trouverez que sur les modèles compacts.',
 img:mr1
-}]
+},
+{
+    nom:'MERCEDES A-CLASS ROSE GOLD',
+    prix:'70DT',
+    score:'4',
+    desc:'une couleur fraîche que vous ne trouverez que sur les modèles compacts.',
+    img:mr1
+    }
+    ,
+    {
+        nom:'MERCEDES A-CLASS ROSE GOLD',
+        prix:'70DT',
+        score:'4',
+        desc:'une couleur fraîche que vous ne trouverez que sur les modèles compacts.',
+        img:mr1
+        }
+        ,
+        {
+            nom:'MERCEDES A-CLASS ROSE GOLD',
+            prix:'70DT',
+            score:'4',
+            desc:'une couleur fraîche que vous ne trouverez que sur les modèles compacts.',
+            img:mr1
+            }]

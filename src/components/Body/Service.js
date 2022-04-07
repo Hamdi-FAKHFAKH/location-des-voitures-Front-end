@@ -6,8 +6,9 @@ import { Col, Container, Row } from 'reactstrap'
 
 export default function Service() {
   return (
-      
-    <div style={{backgroundColor:'#C9D6DF'}}>
+    <> 
+    <div className='imageDeFond'></div>
+    <div className='contenu' style={{backgroundColor:'rgba(255,255,255,0.6)'}}>
       <IndexNavbar/>
       <ServicePageHeader/>
     <Container >
@@ -22,7 +23,7 @@ export default function Service() {
         </Col>
         <Col>
         <p style={{fontSize:'20px',borderTop:'3px solid #b19540',fontWeight:'bold'}}><br/>Les meilleures voitures si vous voudriez à éblouir vos amis</p>
-        <p style={{fontSize:'20px' ,fontStyle:'oblique'}}>nous offrons la meilleure qualité de voitures pour votre confort et de vous porté à votre soirée à l'heure.</p>
+        <p style={{fontSize:'21px' ,fontStyle:'oblique', color:'black'}}>Nous offrons la meilleure qualité de voitures pour votre confort et de vous porté à votre soirée à l'heure.</p>
         </Col>
     </Row>
     <Row style={{padding:'50px 0 '}}>
@@ -31,7 +32,7 @@ export default function Service() {
         </Col>
         <Col>
         <p style={{fontSize:'20px',borderTop:'3px solid #b19540',fontWeight:'bold'}}><br/>Si vous planifiez un mariage, tu a dans le bon endroit </p>
-        <p style={{fontSize:'20px' ,fontStyle:'oblique'}}>Si vous planifiez un mariage et vous vouloir réserver une émerveillant voiture en moindre cout ,c'est l'endroit la plus mieux </p>
+        <p style={{fontSize:'20px' ,fontStyle:'oblique', color:'black'}}>Si vous planifiez un mariage et vous vouloir réserver une émerveillant voiture en moindre cout ,c'est l'endroit la plus mieux </p>
         </Col>
     </Row>
     <Row style={{padding:'50px 0 '}}>
@@ -40,7 +41,7 @@ export default function Service() {
         </Col>
         <Col>
         <p style={{fontSize:'20px',borderTop:'3px solid #b19540',fontWeight:'bold'}}><br/>Pour les jours particuliers, surprenez quelqu'un qui vous est cher. </p>
-        <p style={{fontSize:'20px' ,fontStyle:'oblique'}}>Pour les jours spéciaux où vous voulez surprendre quelqu'un qui vous est cher, vous pouvez choisir l'une de nos merveilleuses voitures pour l'emmener à sa fête </p>
+        <p style={{fontSize:'20px' ,fontStyle:'oblique', color:'black'}}>Pour les jours spéciaux où vous voulez surprendre quelqu'un qui vous est cher, vous pouvez choisir l'une de nos merveilleuses voitures pour l'emmener à sa fête </p>
         </Col>
     </Row>
     <Row style={{padding:'50px 0 '}}>
@@ -49,7 +50,7 @@ export default function Service() {
         </Col>
         <Col>
         <p style={{fontSize:'20px',borderTop:'3px solid #b19540',fontWeight:'bold'}}><br/>Nous vous assure un transfert a l'aéroport rapidement dans une voiture confort </p>
-        <p style={{fontSize:'20px' ,fontStyle:'oblique'}}>Si vous avez besoin d'un transfert vers  l'aéroport et vous avez plusieurs bagage et vous avez besoin d'un voiture confort nous vous offre multiple choix de voiture qui satisfaire votre besoin</p>
+        <p style={{fontSize:'20px' ,fontStyle:'oblique', color:'black'}}>Si vous avez besoin d'un transfert vers  l'aéroport et vous avez plusieurs bagage et vous avez besoin d'un voiture confort nous vous offre multiple choix de voiture qui satisfaire votre besoin</p>
         </Col>
     </Row>
     <Row style={{padding:'50px 0 '}}>
@@ -58,10 +59,10 @@ export default function Service() {
         </Col>
         <Col>
         <p style={{fontSize:'20px',borderTop:'3px solid #b19540',fontWeight:'bold'}}><br/>Nous vous assure un transfert des colis de façon sécuriser tous en respectant le temps d'arrive </p>
-        <p style={{fontSize:'20px' ,fontStyle:'oblique'}}>si vous avez besoin de transférer vos colis vers une autre ville ou même dans votre ville tout en respectant les termes de sécurité et rapidité vous est dans le meilleur endroit</p>
+        <p style={{fontSize:'20px' ,fontStyle:'oblique', color:'black'}}>Si vous avez besoin de transférer vos colis vers une autre ville ou même dans votre ville tout en respectant les termes de sécurité et rapidité vous est dans le meilleur endroit</p>
         </Col>
     </Row>
-    <h1 style={{borderBottom:'2px solid rgba(0,0,0,0.3)', paddingBottom:'15px' , marginBottom:'30px'}}>Avis Clients</h1>
+    <h1 style={{borderBottom:'2px solid #b19540', paddingBottom:'15px' , marginBottom:'30px'}}>Avis Clients</h1>
     <Row>
       <Col>
       <h5 style={{fontSize:'20px'}}><img
@@ -96,5 +97,6 @@ export default function Service() {
     <br/><br/><br/>
     <Footer/>
     </div>
+    </>
   )
 }
