@@ -1,29 +1,9 @@
-/*!
 
-=========================================================
-* Paper Kit React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-kit-react
-
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/paper-kit-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import IndexNavbar from "components/Navbars/IndexNavbar";
 import React, { useState } from "react";
-
 // reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
-
 // core components
-
 function Connexion() {
 
   localStorage.setItem("auth", false);
@@ -58,12 +38,7 @@ function Connexion() {
       date.setTime(date.getTime() + (3*24*60*60*1000));
       document.cookie = `userId=${data.clientId}; expires=${date.toUTCString()};`;
       document.cookie = `token=${data.token}; expires=${date.toUTCString()};`;
-      // store.dispatch( signIn() )
-      // console.log("store: ",store.getState())
       window.location.href = "http://localhost:3001/index";
-
-      // setToken(data.token);
-      // setUserId(data.clientId);
     })
     .catch(err => console.error(err));
     }

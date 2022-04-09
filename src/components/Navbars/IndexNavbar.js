@@ -195,7 +195,7 @@ function IndexNavbar() {
               <NavLink  data-placement="bottom"
                 href='/entreprise'
                 title="envoyer une demande de poster des services ">
-                <i class="fa fa-users" aria-hidden="true"></i>
+                <i className="fa fa-users" aria-hidden="true"></i>
                 <p className="d-lg-none" > Poster une Demande </p>
               </NavLink>
             </NavItem>
