@@ -2,7 +2,7 @@ import React from 'react'
 import '../../assets/css/icons.css'
 import { Button, Card, Col, Form } from 'reactstrap'
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function ({nom,prix,score,desc,img}) {
+export default function CartVoitureUp({nom,prix,score,desc,img}) {
   return (   
                 <Col style={{textAlign:'center'}}>
                 <Card style={{backgroundColor:'ButtonFace',width:'350px'}}>
@@ -19,7 +19,7 @@ export default function ({nom,prix,score,desc,img}) {
                     <input type='hidden' name='score' value={score}/>
                     <input type='hidden' name='desc' value={desc}/>
                     <input type='hidden' name='img' value={img}/>
-                    <Button type='submit' style={{width:'350px'}}> Louer </Button>
+                    <Button type='submit' style={{width:'350px'}}> Voir Plus </Button>
                     </Form>
                     
                 
