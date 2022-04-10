@@ -1,0 +1,21 @@
+
+
+#container {
+  margin: 1rem;
+}
+
+.items {
+  margin-bottom: 1rem;
+
+}
+.page-item{
+    margin-left:2px;
+    float:left;
+    list-style-type:none;
+    
+}
+.pag{
+  margin: auto;
+  width: 400px;
+  margin-bottom: 20px;
+}

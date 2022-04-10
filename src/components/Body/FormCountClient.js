@@ -1,6 +1,7 @@
 import IndexNavbar from 'components/Navbars/IndexNavbar';
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
+
 import {
     Card,
     Button,
@@ -16,7 +17,7 @@ import {
     Col,
   } from "reactstrap";
 export default function FormCountClient() {
-
+    const  [client , setClient] = useState({});
     /*var onSubmitForm =  ()=>{
         const rep =  axios.get("http://localhost:3000/api/owner").then(res => {
             console.log(res);
@@ -26,9 +27,17 @@ export default function FormCountClient() {
         }*/
       
         function onSubmitForm(e) {
-            e.preventDefault();
-            fetch("http://localhost:3000/api/owner")
-                .then(res => console.log(res))
+            e.preventDefault();        
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(client)
+            };
+            fetch('http://localhost:3000/api/client/signUp', requestOptions)
+              .then(() => {
+                  console.log("tba3thet mrigla", client)
+                  window.location.href = "http://localhost:3001/connexion";
+                }).catch( error => console.log("erreur signUp: ", error));
         }
         
   return (
@@ -48,14 +57,14 @@ export default function FormCountClient() {
                 <h3 className="title mx-auto">Crée un Compte</h3>
                 <Form className="register-form" onSubmit={onSubmitForm}> 
                             <InputGroup>
-                                <Input placeholder="Prénom" type="text" />
+                                <Input placeholder="Prénom" type="text" onChange={(e) => setClient( {...client ,prenom: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                     <InputGroupText><i aria-hidden={true} className="fa fa-group" /></InputGroupText>
                                 </InputGroupAddon>
                             </InputGroup>
                             <br/>
                             <InputGroup>
-                                <Input placeholder="Nom" type="text" />
+                                <Input placeholder="Nom" type="text" onChange={(e) => setClient( {...client ,nom: e.target.value} )}/>
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-group" />
@@ -64,7 +73,7 @@ export default function FormCountClient() {
                             </InputGroup>
                             <br/>
                             <InputGroup>
-                                <Input placeholder="Email" type="email" />
+                                <Input placeholder="Email" type="email" onChange={(e) => setClient( {...client ,Email: e.target.value} )}/>
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-envelope-o" />
@@ -73,7 +82,7 @@ export default function FormCountClient() {
                             </InputGroup>
                             <br/>
                             <InputGroup>
-                                <Input placeholder="Téléphone" type="text" />
+                                <Input placeholder="Téléphone" type="text" onChange={(e) => setClient( {...client ,telephone: parseInt(e.target.value)} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-phone" />
@@ -82,7 +91,7 @@ export default function FormCountClient() {
                             </InputGroup>
                             <br/>
                             <InputGroup>
-                                <Input placeholder="N° CIN" type="text" />
+                                <Input placeholder="N° CIN" type="text" onChange={e => setClient( {...client ,CIN: parseInt(e.target.value)} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-id-card-o" />
@@ -91,7 +100,7 @@ export default function FormCountClient() {
                             </InputGroup>
                             <br/> 
                             <InputGroup>
-                                <Input placeholder="Date de Naissance " type="text" onFocus={(e)=>e.target.type = 'date'} onBlur={(e)=>e.target.type = 'text'} />
+                                <Input placeholder="Date de Naissance " type="text" onFocus={(e)=>e.target.type = 'date'} onBlur={(e)=>e.target.type = 'text'} onChange={(e) => setClient( {...client ,date_de_naissance: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-calendar" />
@@ -100,7 +109,7 @@ export default function FormCountClient() {
                             </InputGroup>
                             <br/>
                             <InputGroup>
-                                <Input placeholder="Pseudo" type="text" />
+                                <Input placeholder="Pseudo" type="text" onChange={(e) => setClient( {...client ,userName: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-user-circle" />
@@ -110,7 +119,7 @@ export default function FormCountClient() {
                                 <br/>
                          
                                 <InputGroup>
-                                    <Input placeholder="Mot de Passe " type="text" />
+                                    <Input placeholder="Mot de Passe " type="password" onChange={(e) => setClient( {...client ,motDePasse: e.target.value} )} />
                                     <InputGroupAddon addonType="append">
                                     <InputGroupText>
                                         <i aria-hidden={true} className="fa fa-key" />
