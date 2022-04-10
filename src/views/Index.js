@@ -3,18 +3,10 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import Cartvoiture from "components/Body/Cartvoiture";
 import { Container, Row } from "reactstrap";
-//import {liste} from '../assets/data/listcar'
+import { useEffect, useState } from "react";
 import Footer from "components/Footers/Footer";
 import { PaginatedItems } from "components/Body/PaginatedItems";
 function Index() {
-  document.documentElement.classList.remove("nav-open");
-  React.useEffect(() => {
-    document.body.classList.add("index");
-    return function cleanup() {
-      document.body.classList.remove("index");
-    };
-  });
-  
   return (
     <>
   <div className='imageDeFond'></div>

@@ -1,13 +1,13 @@
 import IndexNavbar from 'components/Navbars/IndexNavbar';
-import axios from 'axios'
-import React from 'react'
+// import axios from 'axios'
+import React, { useState } from 'react'
 import {
     Card,
     Button,
-    Alert,
+    // Alert,
     Form,
     Container,   
-    FormGroup,
+    // FormGroup,
     Input,
     InputGroupAddon,
     InputGroupText,
@@ -24,12 +24,42 @@ export default function FormEntrepriser() {
         console.log(rep);
         //enregistre le retour de l'API dans le State
         }*/
-      
-        function onSubmitForm(e) {
-            e.preventDefault();
-            fetch("http://localhost:3000/api/owner")
-                .then(res => console.log(res))
+      const [ owner, setOwner ] = useState({});
+      const [ wrongConfidentials, setWrongConfidentials ] = useState({isWrong: false, message: ''});
+
+        async function onSubmitForm(e) {
+            e.preventDefault();        
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(owner)
+            };
+            fetch('http://localhost:3000/api/owner/signUp', requestOptions)
+              .then(( response ) => {
+                if(response.status === 201){
+                    window.location.href = "/connexion";
+                } else if( response.status === 400){
+                    console.log("des données qui doinvent étre unique mais qui sont déjà crées");
+                    setWrongConfidentials({ isWrong:true, message: "faux nom d'utilisateur ou faux mot de passe" })
+                } else if( response.status === 422 ) {
+                    console.log(response.statusText);
+                    setWrongConfidentials({ isWrong:true, message: response.statusText })
+
+                } else {
+                    console.log("une erreure inconnue est survenue ");
+                    setWrongConfidentials({ isWrong:true, message: "une erreure inconnue est survenue" })
+
+                }
+                }).catch( error => console.log("erreur signUp: ", error));
         }
+
+        const style = {
+            'color': 'red',
+            'zIndex': '-1',
+            'position':'absolute',
+            'bottom':'70px',
+            'left':'35px'
+          }
         
   return (
      <>
@@ -47,14 +77,14 @@ export default function FormEntrepriser() {
                 <Form onSubmit={onSubmitForm} className="register-form"> 
                 <Row><Col>
                             <InputGroup>
-                                <Input placeholder="Prénom" type="text" />
+                                <Input placeholder="Prénom" type="text" onChange={(e) => setOwner( {...owner ,prenom: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                     <InputGroupText><i aria-hidden={true} className="fa fa-group" /></InputGroupText>
                                 </InputGroupAddon>
                             </InputGroup>
                             <br/>
                             <InputGroup>
-                                <Input placeholder="Email" type="email" />
+                                <Input placeholder="Email" type="email" onChange={(e) => setOwner( {...owner ,Email: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-envelope-o" />
@@ -64,7 +94,7 @@ export default function FormEntrepriser() {
                         </Col>
                         <Col>
                             <InputGroup>
-                                <Input placeholder="Nom" type="text" />
+                                <Input placeholder="Nom" type="text" onChange={(e) => setOwner( {...owner ,nom: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-group" />
@@ -73,7 +103,7 @@ export default function FormEntrepriser() {
                             </InputGroup>
                            <br/>
                             <InputGroup>
-                                <Input placeholder="Téléphone" type="number" />
+                                <Input placeholder="Téléphone" type="number" onChange={(e) => setOwner( {...owner ,telephone: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-phone" />
@@ -86,7 +116,7 @@ export default function FormEntrepriser() {
                     <Row>
                         <Col>
                             <InputGroup>
-                                <Input placeholder="N° CIN" type="text" />
+                                <Input placeholder="N° CIN" type="text" onChange={(e) => setOwner( {...owner ,CIN: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-id-card-o" />
@@ -95,7 +125,7 @@ export default function FormEntrepriser() {
                             </InputGroup>
                             <br/> 
                             <InputGroup>
-                                <Input placeholder="Pseudo" type="text" />
+                                <Input placeholder="Pseudo" type="text" onChange={(e) => setOwner( {...owner ,pseudo: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-user-circle" />
@@ -105,7 +135,7 @@ export default function FormEntrepriser() {
                             </Col><Col>
 
                             <InputGroup>
-                                <Input placeholder="Date de Naissance" type="text" onFocus={(e)=>e.target.type = 'date'} onBlur={(e)=>e.target.type = 'text'}/>
+                                <Input placeholder="Date de Naissance" type="text" onChange={(e) => setOwner( {...owner ,date_de_naissance: e.target.value} )} onFocus={(e)=>e.target.type = 'date'} onBlur={(e)=>e.target.type = 'text'}/>
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-calendar" />
@@ -115,7 +145,7 @@ export default function FormEntrepriser() {
                                 <br/>
                          
                                 <InputGroup>
-                                    <Input placeholder="Mot de Passe " type="text" />
+                                    <Input placeholder="Mot de Passe " type="text" onChange={(e) => setOwner( {...owner ,motDePasse: e.target.value} )} />
                                     <InputGroupAddon addonType="append">
                                     <InputGroupText>
                                         <i aria-hidden={true} className="fa fa-key" />
@@ -129,7 +159,7 @@ export default function FormEntrepriser() {
                      <Row>
                         <Col>
                             <InputGroup>
-                                <Input placeholder="Ville" type="text" />
+                                <Input placeholder="addresse" type="text" onChange={(e) => setOwner( {...owner , addresse: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                 <i class="fa fa-flag" aria-hidden="true"></i>
@@ -140,7 +170,7 @@ export default function FormEntrepriser() {
                             </Col><Col>
                            
                             <InputGroup>
-                                <Input placeholder="Nom de Entreprise" type="text" />
+                                <Input placeholder="Nom de Entreprise" type="text" onChange={(e) => setOwner( {...owner ,entrepriseName: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i class="fa fa-building" aria-hidden="true"></i>
@@ -154,6 +184,8 @@ export default function FormEntrepriser() {
                      <Col className="ml-auto mr-auto" lg='4'><Button block className="btn-round" color="dark" type='submit' >Envoyer</Button></Col>
                      </Row>
                     </Form>
+                    { wrongConfidentials.isWrong && <span style={ style }> { wrongConfidentials.message }</span>}
+
               </Card>
             
         </Container>
