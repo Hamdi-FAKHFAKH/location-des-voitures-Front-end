@@ -156,6 +156,7 @@ function IndexNavbar() {
               <NavLink href="/service">Services</NavLink>
             </NavItem>
             <NavItem>
+
               <NavLink href="/contact">Contact</NavLink>
             </NavItem>
             {!getCookie("userId") || !getCookie("token") ||

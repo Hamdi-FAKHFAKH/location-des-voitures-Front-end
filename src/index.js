@@ -13,6 +13,7 @@ import Service from "components/Body/Service";
 import FormEntrepriser from "components/Body/FormEntrepriser";
 import Contact from "components/Body/Contact";
 import Profile from './components/Body/Profile';
+import ProfileSociété from "components/Body/ProfileSociété";
 /*import NucleoIcons from "views/NucleoIcons.js";
 import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
@@ -41,6 +42,7 @@ ReactDOM.render(
       <Route path="/connexion" render={(props) => <Connexion {...props} />}/>
       <Route path="/service" render={(props) => <Service {...props} />}/>
       <Route path="/entreprise" render={(props) => <FormEntrepriser {...props} />}/>
+      <Route path="/profiles" render={(props) => <ProfileSociété {...props} />}/>
       <Route path="/contact" render={(props) => <Contact {...props} />}/>
       <Route path="/profile" render={(props) => <Profile {...props} />}/>
       <Redirect to="/index" />
