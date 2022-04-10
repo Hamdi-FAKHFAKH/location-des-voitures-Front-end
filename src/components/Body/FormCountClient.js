@@ -1,14 +1,14 @@
 import IndexNavbar from 'components/Navbars/IndexNavbar';
-import axios from 'axios'
+// import axios from 'axios'
 import React, { useState } from 'react'
 
 import {
     Card,
     Button,
-    Alert,
+    // Alert,
     Form,
     Container,   
-    FormGroup,
+    // FormGroup,
     Input,
     InputGroupAddon,
     InputGroupText,
@@ -18,15 +18,8 @@ import {
   } from "reactstrap";
 export default function FormCountClient() {
     const  [client , setClient] = useState({});
-    /*var onSubmitForm =  ()=>{
-        const rep =  axios.get("http://localhost:3000/api/owner").then(res => {
-            console.log(res);
-        }).catch(error => console.log(error))
-        console.log(rep);
-        //enregistre le retour de l'API dans le State
-        }*/
-      
-        function onSubmitForm(e) {
+    const [ wrongConfidentials, setWrongConfidentials ] = useState({isWrong: false, message: ''});
+        async function onSubmitForm(e) {
             e.preventDefault();        
             const requestOptions = {
                 method: 'POST',
@@ -34,11 +27,31 @@ export default function FormCountClient() {
                 body: JSON.stringify(client)
             };
             fetch('http://localhost:3000/api/client/signUp', requestOptions)
-              .then(() => {
-                  console.log("tba3thet mrigla", client)
-                  window.location.href = "http://localhost:3001/connexion";
+              .then(( response ) => {
+                if(response.status === 201){
+                    window.location.href = "/connexion";
+                } else if( response.status === 400){
+                    console.log("des données qui doinvent étre unique mais qui sont déjà crées");
+                    setWrongConfidentials({ isWrong:true, message: "faux nom d'utilisateur ou faux mot de passe" })
+                } else if( response.status === 422 ) {
+                    console.log(response.statusText);
+                    setWrongConfidentials({ isWrong:true, message: response.statusText })
+
+                } else {
+                    console.log("une erreure inconnue est survenue ");
+                    setWrongConfidentials({ isWrong:true, message: "une erreure inconnue est survenue" })
+
+                }
                 }).catch( error => console.log("erreur signUp: ", error));
         }
+
+        const style = {
+            'color': 'red',
+            'zIndex': '-1',
+            'position':'absolute',
+            'bottom':'70px',
+            'left':'35px'
+          }
         
   return (
      <>
@@ -82,7 +95,7 @@ export default function FormCountClient() {
                             </InputGroup>
                             <br/>
                             <InputGroup>
-                                <Input placeholder="Téléphone" type="text" onChange={(e) => setClient( {...client ,telephone: parseInt(e.target.value)} )} />
+                                <Input placeholder="Téléphone" type="text" onChange={(e) => setClient( {...client ,telephone: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-phone" />
@@ -109,7 +122,7 @@ export default function FormCountClient() {
                             </InputGroup>
                             <br/>
                             <InputGroup>
-                                <Input placeholder="Pseudo" type="text" onChange={(e) => setClient( {...client ,userName: e.target.value} )} />
+                                <Input placeholder="Pseudo" type="text" onChange={(e) => setClient( {...client ,pseudo: e.target.value} )} />
                                 <InputGroupAddon addonType="append">
                                 <InputGroupText>
                                     <i aria-hidden={true} className="fa fa-user-circle" />
@@ -129,6 +142,8 @@ export default function FormCountClient() {
                             
                         <Button block className="btn-round" color="dark" type='submit' >S'inscrire</Button>
                     </Form>
+                    { wrongConfidentials.isWrong && <span style={ style }> { wrongConfidentials.message }</span>}
+
               </Card>
               </Col>
           </Row>
