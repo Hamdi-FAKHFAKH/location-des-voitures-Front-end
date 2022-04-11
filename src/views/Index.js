@@ -14,7 +14,7 @@ function Index() {
   <IndexNavbar />
    <IndexHeader/>
   <div className="main" >
-  <PaginatedItems itemsPerPage={3}/>
+  <PaginatedItems itemsPerPage={6}/>
      </div>
      <br/><br/>
      <Footer/>

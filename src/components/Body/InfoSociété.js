@@ -27,7 +27,7 @@ export default function InfoSociété() {
                 <InputGroup>
                 <Input type='text' name='nom' id='nom' defaultValue='gomri' disabled={disable.a}></Input>
                 <InputGroupAddon addonType="append">
-                    <InputGroupText onClick={(e)=>setDisable({...disable,'a':false})}>
+                    <InputGroupText onClick={(e)=>setDisable({...disable,'a':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true" ></i>
                     </InputGroupText>
                 </InputGroupAddon>
@@ -38,7 +38,7 @@ export default function InfoSociété() {
                 <InputGroup>
                 <Input type='text' name='pre' id='pre' defaultValue='akrem' disabled={disable.b}></Input>
                 <InputGroupAddon addonType="append">
-                    <InputGroupText onClick={(e)=>setDisable({...disable,'b':false})}>
+                    <InputGroupText onClick={(e)=>setDisable({...disable,'b':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true" ></i>
                     </InputGroupText>
                 </InputGroupAddon>
@@ -52,7 +52,7 @@ export default function InfoSociété() {
                 <InputGroup>
                 <Input type='email' name='email' id='email' defaultValue='gomri@gmail.com'  disabled={disable.c}></Input>
                 <InputGroupAddon addonType="append">
-                    <InputGroupText  onClick={(e)=>setDisable({...disable,'c':false})}>
+                    <InputGroupText  onClick={(e)=>setDisable({...disable,'c':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true"></i>
                     </InputGroupText>
                 </InputGroupAddon>
@@ -63,7 +63,7 @@ export default function InfoSociété() {
             <InputGroup>
                 <Input type='text' name='nomE' id='nomE' defaultValue='20666888'  disabled={disable.d}></Input> 
                 <InputGroupAddon addonType="append">
-                    <InputGroupText onClick={(e)=>setDisable({...disable,'d':false})}>
+                    <InputGroupText onClick={(e)=>setDisable({...disable,'d':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true"></i>
                     </InputGroupText>
                 </InputGroupAddon>
@@ -77,7 +77,7 @@ export default function InfoSociété() {
                 <InputGroup>
                 <Input type='text' name='ps' id='ps' defaultValue='gg'  disabled={disable.e}></Input>
                 <InputGroupAddon addonType="append">
-                    <InputGroupText onClick={(e)=>setDisable({...disable,'e':false})}>
+                    <InputGroupText onClick={(e)=>setDisable({...disable,'e':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true" ></i>
                     </InputGroupText>
                 </InputGroupAddon>
@@ -88,7 +88,7 @@ export default function InfoSociété() {
             <InputGroup>
                 <Input type='password' name='mp' id='mp' defaultValue='1234'  disabled={disable.f}></Input> 
                 <InputGroupAddon addonType="append">
-                    <InputGroupText onClick={(e)=>setDisable({...disable,'f':false})}>
+                    <InputGroupText onClick={(e)=>setDisable({...disable,'f':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true" ></i>
                     </InputGroupText>
                 </InputGroupAddon>
@@ -98,11 +98,11 @@ export default function InfoSociété() {
         <br/>
         <Row>
             <Col>
-                <Label for='ville' style={{fontSize:'15px',fontWeight:'bold'}}>Pseudo</Label>
+                <Label for='ville' style={{fontSize:'15px',fontWeight:'bold'}}>Ville</Label>
                 <InputGroup>
                 <Input type='text' name='ville' id='ville' defaultValue='sousse'  disabled={disable.g}></Input>
                 <InputGroupAddon addonType="append">
-                    <InputGroupText onClick={(e)=>setDisable({...disable,'g':false})}>
+                    <InputGroupText onClick={(e)=>setDisable({...disable,'g':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true" ></i>
                     </InputGroupText>
                 </InputGroupAddon>
@@ -113,7 +113,7 @@ export default function InfoSociété() {
             <InputGroup>
                 <Input type='text' name='nome' id='nome' defaultValue='société de hamdi'  disabled={disable.h}></Input> 
                 <InputGroupAddon addonType="append">
-                    <InputGroupText onClick={(e)=>setDisable({...disable,'h':false})}>
+                    <InputGroupText onClick={(e)=>setDisable({...disable,'h':false})} style={{cursor: 'pointer'}} >
                                     <i className="fa fa-wrench"  aria-hidden="true" ></i>
                     </InputGroupText>
                 </InputGroupAddon>

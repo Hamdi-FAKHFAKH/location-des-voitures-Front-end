@@ -145,7 +145,7 @@ export default function FormEntrepriser() {
                                 <br/>
                          
                                 <InputGroup>
-                                    <Input placeholder="Mot de Passe " type="text" onChange={(e) => setOwner( {...owner ,motDePasse: e.target.value} )} />
+                                    <Input placeholder="Mot de Passe " type="password" onChange={(e) => setOwner( {...owner ,motDePasse: e.target.value} )} />
                                     <InputGroupAddon addonType="append">
                                     <InputGroupText>
                                         <i aria-hidden={true} className="fa fa-key" />

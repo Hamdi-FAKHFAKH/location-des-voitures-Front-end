@@ -201,7 +201,7 @@ function IndexNavbar() {
                 <NavItem>
                   <NavLink
                     data-placement="bottom"
-                    href="/profile"
+                    href="/profiles"
                     title="envoyer une demande de poster des services "
                   > 
                     <i className="fa fa-user-circle" aria-hidden="true"></i>
