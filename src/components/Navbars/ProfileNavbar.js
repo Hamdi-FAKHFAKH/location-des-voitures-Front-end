@@ -164,7 +164,7 @@ function ProfileNavbar() {
                       <NavLink  data-placement="bottom"
                         href='/inscription'
                         title="désinscription ">
-                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <i className="fa fa-sign-out" aria-hidden="true"></i>
                         <p className="d-lg-none" >se déconnecter de votre compte</p>
                       </NavLink>
                     </NavItem>

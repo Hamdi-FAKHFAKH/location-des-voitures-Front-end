@@ -14,26 +14,7 @@ import FormEntrepriser from "components/Body/FormEntrepriser";
 import Contact from "components/Body/Contact";
 import Profile from './components/Body/Profile';
 import ProfileSociété from "components/Body/ProfileSociété";
-/*import NucleoIcons from "views/NucleoIcons.js";
-import LandingPage from "views/examples/LandingPage.js";
-import ProfilePage from "views/examples/ProfilePage.js";
-
-// others
-/*<Route
-path="/nucleo-icons"
-render={(props) => <NucleoIcons {...props} />}
-/>
-<Route
-path="/landing-page"
-render={(props) => <LandingPage {...props} />}
-/>
-<Route
-path="/profile-page"
-render={(props) => <ProfilePage {...props} />}
-/>
-<Route
-path="/register-page"
-/>*/
+import { Pop } from "components/Body/Pop";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -45,6 +26,7 @@ ReactDOM.render(
       <Route path="/profiles" render={(props) => <ProfileSociété {...props} />}/>
       <Route path="/contact" render={(props) => <Contact {...props} />}/>
       <Route path="/profile" render={(props) => <Profile {...props} />}/>
+      <Route path="/pop" render={(props) => <Pop {...props} />}/>
       <Redirect to="/index" />
 
     </Switch>
