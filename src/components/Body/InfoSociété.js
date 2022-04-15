@@ -1,4 +1,4 @@
-import React ,{ useEffect }from 'react'
+import React ,{ useEffect, useState }from 'react'
 
 import { Button, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Row } from 'reactstrap'
 
@@ -12,11 +12,61 @@ export default function InfoSociété() {
              }
         }
     )
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) === " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) === 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
+      const [ ownerDetails, setOwnerDetails ] = useState([])
+
+
+    const getOwnerDetails = () => {
+        console.log("getmesvoitures");
+        const requestOptions = {
+            method: 'Get',
+            headers: { 
+              'Content-Type': 'application/json', 
+              'Accept': 'application/json',
+              'Authorization': 'Basic  '+getCookie("token")
+            },
+        };
+        console.log("userId ", getCookie("userId"));
+        console.log("token ", getCookie("token"));
+        fetch('http://localhost:3000/api/owner/'+getCookie("userId"), requestOptions)
+        .then(response => response.json())
+        .then( owner => {
+          console.log(owner);
+          setOwnerDetails(owner)
+        })
+        .catch(err => console.error(err));
+      }
+
+      useEffect(()=>{
+        getOwnerDetails()
+      },[])
+
+    document.documentElement.classList.remove("nav-open");
+    React.useEffect(() => {
+      document.body.classList.add("index");
+      return function cleanup() {
+        document.body.classList.remove("index");
+      };
+    });
+
   return (
-    <div>
-        
-        
-        
+    <div>   
         <Container>
         <h2 style={{fontWeight:'bold',font:'50px serif'}}> Gérer compte </h2>
         <br/>
