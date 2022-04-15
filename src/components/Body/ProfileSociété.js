@@ -5,6 +5,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Col, Container, Row } from 'reactstrap'
 import photo1 from '../../assets/img/1.jpg'
+import GestionVoitures from './GestionVoitures'
 import InfoSociété from './InfoSociété'
 import Listeofcar from './Listeofcar'
 
@@ -26,7 +27,7 @@ export default function ProfileSociété() {
             
             <Col>
             <h1 style={{textAlign:'center',fontWeight:'bold'}}>Bienvenue dans votre profile</h1>
-            {vue==='vue1'?<InfoSociété/>:<Listeofcar/>}
+            {vue==='vue1'?<InfoSociété/>:<GestionVoitures/>}
             
             </Col>
         </Row>
