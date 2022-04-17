@@ -13,6 +13,7 @@ export default function InfoSociété() {
         }
     )
 
+    
     function getCookie(cname) {
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);
@@ -31,24 +32,25 @@ export default function InfoSociété() {
 
       const [ ownerDetails, setOwnerDetails ] = useState([])
 
-
+      function getInput(e){
+        setOwnerDetails({ ...ownerDetails, [e.target.name]: e.target.value })
+      }
+    
     const getOwnerDetails = () => {
-        console.log("getmesvoitures");
         const requestOptions = {
             method: 'Get',
             headers: { 
               'Content-Type': 'application/json', 
               'Accept': 'application/json',
-              'Authorization': 'Basic  '+getCookie("token")
+              'Authorization': 'bearer '+getCookie("token")
             },
         };
-        console.log("userId ", getCookie("userId"));
-        console.log("token ", getCookie("token"));
+
         fetch('http://localhost:3000/api/owner/'+getCookie("userId"), requestOptions)
         .then(response => response.json())
         .then( owner => {
-          console.log(owner);
           setOwnerDetails(owner)
+          console.log(owner.motDePasse);
         })
         .catch(err => console.error(err));
       }
@@ -56,6 +58,24 @@ export default function InfoSociété() {
       useEffect(()=>{
         getOwnerDetails()
       },[])
+
+      async function sendUpdateOwner(event){
+          event.preventDefault();
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 
+              'Content-Type': 'application/json', 
+              'Accept': 'application/json',
+              'Authorization': 'Bearer ' + getCookie("token")
+            },
+            body: JSON.stringify(ownerDetails)
+        };
+        try{
+          await fetch('http://localhost:3000/api/owner/profile', requestOptions);
+        } catch {
+          console.log("error");
+        }
+      }
 
     document.documentElement.classList.remove("nav-open");
     React.useEffect(() => {
@@ -73,9 +93,9 @@ export default function InfoSociété() {
         <Form>
         <Row>
             <Col>
-                <Label for='nom' style={{fontSize:'15px',fontWeight:'bold'}}>Nom</Label>
+                <Label for='nom' style={{fontSize:'15px',fontWeight:'bold'}}>nom</Label>
                 <InputGroup>
-                <Input type='text' name='nom' id='nom' defaultValue='gomri' disabled={disable.a}></Input>
+                <Input type='text' name='nom' id='nom' defaultValue={ ownerDetails.nom } onChange={ (e) => getInput(e)}  disabled={disable.a}></Input>
                 <InputGroupAddon addonType="append">
                     <InputGroupText onClick={(e)=>setDisable({...disable,'a':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true" ></i>
@@ -84,9 +104,9 @@ export default function InfoSociété() {
                 </InputGroup>
             </Col>
             <Col>
-                <Label for='pre' style={{fontSize:'15px',fontWeight:'bold'}}>Prénom </Label>
+                <Label for='prenom' style={{fontSize:'15px',fontWeight:'bold'}}>Prénom </Label>
                 <InputGroup>
-                <Input type='text' name='pre' id='pre' defaultValue='akrem' disabled={disable.b}></Input>
+                <Input type='text' name='prenom' id='prenom' defaultValue={ ownerDetails.prenom } onChange={ (e) => getInput(e)} disabled={disable.b}></Input>
                 <InputGroupAddon addonType="append">
                     <InputGroupText onClick={(e)=>setDisable({...disable,'b':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true" ></i>
@@ -100,7 +120,7 @@ export default function InfoSociété() {
             <Col>
                 <Label for='email' style={{fontSize:'15px',fontWeight:'bold'}}>Email</Label>
                 <InputGroup>
-                <Input type='email' name='email' id='email' defaultValue='gomri@gmail.com'  disabled={disable.c}></Input>
+                <Input type='email' name='email' id='email' defaultValue={ ownerDetails.Email } onChange={ (e) => getInput(e)} disabled={disable.c}></Input>
                 <InputGroupAddon addonType="append">
                     <InputGroupText  onClick={(e)=>setDisable({...disable,'c':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true"></i>
@@ -109,9 +129,9 @@ export default function InfoSociété() {
                 </InputGroup>
             </Col>
             <Col>
-            <Label for='nom' style={{fontSize:'15px',fontWeight:'bold'}}>Téléphone </Label>
+            <Label for='telephone' style={{fontSize:'15px',fontWeight:'bold'}}>Téléphone </Label>
             <InputGroup>
-                <Input type='text' name='nomE' id='nomE' defaultValue='20666888'  disabled={disable.d}></Input> 
+                <Input type='text' name='telephone' id='telephone' defaultValue={ ownerDetails.telephone } onChange={ (e) => getInput(e)} disabled={disable.d}></Input> 
                 <InputGroupAddon addonType="append">
                     <InputGroupText onClick={(e)=>setDisable({...disable,'d':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true"></i>
@@ -123,9 +143,9 @@ export default function InfoSociété() {
         <br/>
         <Row>
             <Col>
-                <Label for='ps' style={{fontSize:'15px',fontWeight:'bold'}}>Pseudo</Label>
+                <Label for='pseudo' style={{fontSize:'15px',fontWeight:'bold'}}>Pseudo</Label>
                 <InputGroup>
-                <Input type='text' name='ps' id='ps' defaultValue='gg'  disabled={disable.e}></Input>
+                <Input type='text' name='pseudo' id='pseudo' defaultValue={ ownerDetails.pseudo } onChange={ (e) => getInput(e)} disabled={disable.e}></Input>
                 <InputGroupAddon addonType="append">
                     <InputGroupText onClick={(e)=>setDisable({...disable,'e':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true" ></i>
@@ -134,9 +154,9 @@ export default function InfoSociété() {
                 </InputGroup>
             </Col>
             <Col>
-            <Label for='mp' style={{fontSize:'15px',fontWeight:'bold'}}>Mot de Passe </Label>
+            <Label for='motDePasse' style={{fontSize:'15px',fontWeight:'bold'}}>Mot de Passe </Label>
             <InputGroup>
-                <Input type='password' name='mp' id='mp' defaultValue='1234'  disabled={disable.f}></Input> 
+                <Input type='password' name='motDePasse' id='mp' placeholder='change your password' disabled={disable.f} onChange={ (e) => getInput(e)}></Input> 
                 <InputGroupAddon addonType="append">
                     <InputGroupText onClick={(e)=>setDisable({...disable,'f':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true" ></i>
@@ -148,9 +168,9 @@ export default function InfoSociété() {
         <br/>
         <Row>
             <Col>
-                <Label for='ville' style={{fontSize:'15px',fontWeight:'bold'}}>Ville</Label>
+                <Label for='addresse' style={{fontSize:'15px',fontWeight:'bold'}}>addresse</Label>
                 <InputGroup>
-                <Input type='text' name='ville' id='ville' defaultValue='sousse'  disabled={disable.g}></Input>
+                <Input type='text' name='addresse' id='addresse' defaultValue={ ownerDetails.addresse } onChange={ (e) => getInput(e)} disabled={disable.g}></Input>
                 <InputGroupAddon addonType="append">
                     <InputGroupText onClick={(e)=>setDisable({...disable,'g':false})} style={{cursor: 'pointer'}}>
                                     <i className="fa fa-wrench"  aria-hidden="true" ></i>
@@ -159,9 +179,9 @@ export default function InfoSociété() {
                 </InputGroup>
             </Col>
             <Col>
-            <Label for='nome' style={{fontSize:'15px',fontWeight:'bold'}}>Nom de l'Entreprise </Label>
+            <Label for='entrepriseName' style={{fontSize:'15px',fontWeight:'bold'}}>Nom de l'Entreprise </Label>
             <InputGroup>
-                <Input type='text' name='nome' id='nome' defaultValue='société de hamdi'  disabled={disable.h}></Input> 
+                <Input type='text' name='entrepriseName' id='entrepriseName' defaultValue={ ownerDetails.entrepriseName } onChange={ (e) => getInput(e)} disabled={disable.h}></Input> 
                 <InputGroupAddon addonType="append">
                     <InputGroupText onClick={(e)=>setDisable({...disable,'h':false})} style={{cursor: 'pointer'}} >
                                     <i className="fa fa-wrench"  aria-hidden="true" ></i>
@@ -172,7 +192,7 @@ export default function InfoSociété() {
         </Row>
         <br/>
         <Row><Col>
-            <Button type='submit' disabled={disablebt}> Sauvgarder</Button></Col>
+            <Button type='submit' disabled={disablebt} onClick={ (event) => sendUpdateOwner(event) }> Sauvgarder</Button></Col>
         </Row>
         </Form>
         </Container>

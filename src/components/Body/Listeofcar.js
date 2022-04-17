@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react'
 import { Button, Container, Row } from 'reactstrap'
-import {liste} from '../../assets/data/listcar'
 import CartVoitureUp from './CartVoitureUp'
 
 export default function Listeofcar({vue,setvue}) {
@@ -30,19 +29,17 @@ export default function Listeofcar({vue,setvue}) {
           method: 'Get',
           headers: { 
             'Content-Type': 'application/json', 
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            
           },
       };
       console.log(getCookie("userId"));
+      console.log("getmesvoitures");
       fetch('http://localhost:3000/api/owner/myVoitures/'+getCookie("userId"), requestOptions)
       .then(response => response.json())
       .then( voitures => {
         console.log(voitures);
-        setMesVoitures(voitures)
-          // store.dispatch( signIn() )
-          // console.log("store: ",store.getState())
-          // setToken(data.token);
-          // setUserId(data.clientId);
+        setMesVoitures(voitures);
       })
       .catch(err => console.error(err));
     }
@@ -56,7 +53,7 @@ export default function Listeofcar({vue,setvue}) {
 
   useEffect(()=> {
     getMesVoitures();
-  },[mesVoitures])
+  },[vue])
 
 
   return (

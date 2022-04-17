@@ -1,18 +1,87 @@
 import ContactHeader from 'components/Headers/ContactHeader'
 import IndexNavbar from 'components/Navbars/IndexNavbar'
-import React from 'react'
+import React,{ useState, useEffect } from 'react'
 import '../../assets/css/filter.css'
 import { Button, Col, Container, Input, Label, Row } from 'reactstrap';
 import Footer from 'components/Footers/Footer';
 export default function Contact() {
     const ref = React.useRef(null);
-const [map, setMap] = React.useState();
+const [map, setMap] = useState();
 
-React.useEffect(() => {
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+
+useEffect(() => {
   if (ref.current && !map) {
     setMap(new window.google.maps.Map(ref.current, {}));
   }
 }, [ref, map]);
+
+
+/**************** is USER authentified **************/
+const [ isUserAuth, setIsUserAuth ] = useState(true);
+useEffect(() => {
+
+  (!getCookie("userId") || !getCookie("token") ||
+  getCookie("userId") === "null" || getCookie("token") === "null" ||
+  getCookie("userId") === "undefined" || getCookie("token")=== "undefined")?
+  setIsUserAuth(false): setIsUserAuth(true)  
+},[])
+/***************************************************/
+
+async function sendForm(e){
+  e.preventDefault();
+  if( isUserAuth && Form !== {}) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + getCookie("token")
+      },
+      body: JSON.stringify(Form)
+  };
+  try{
+    await fetch('http://localhost:3000/api/message/', requestOptions);
+  } catch {
+    console.log("error");
+  }
+  } else if( !isUserAuth && Form !== {}) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(Form)
+  };
+  try{
+    await fetch('http://localhost:3000/api/message/postmessage', requestOptions);
+  } catch {
+    console.log("error");
+  }
+}}
+
+const [ Form, setForm ] = useState({})
+function getInput(e){
+  setForm({ ...Form, [e.target.name]: e.target.value })
+}
+
 
   return (
     <>
@@ -30,32 +99,41 @@ React.useEffect(() => {
             <Col lg={4}>
             <h4 style={{font:'30px librebaskerville',borderTop:'3px #b19540 solid', paddingTop:'20px',width:'300px',fontWeight:'bold'}}>Entrer en contact</h4><br/>
             <p style={{font:'15px cursive'}} >Envoyez-nous vos messages et nous <br/>vous répondrons dans les plus brefs délais</p><br/>
-            <i class="fa fa-phone" aria-hidden="true" style={{color:'#b19540',fontSize:'20px'}}></i>&ensp;<span style={{font:'20px serif',fontWeight:'bold'}}>27-001-360 &ensp; 74-200-320 </span><br/><br/>
-            <i class="fa fa-envelope-o" aria-hidden="true" style={{color:'#b19540',fontSize:'20px'}}></i>&ensp;<span style={{font:'20px serif',fontWeight:'bold'}}>Locationvoitures@info.com</span><br/><br/>
-            <i class="fa fa-map-marker" aria-hidden="true" style={{color:'#b19540',fontSize:'20px'}}></i>&ensp;<span style={{font:'20px serif',fontWeight:'bold'}}>Rue ibn Khaldun, Cité Taffala,<br/>&ensp;&ensp; 4003 Sousse Tunisie, TN</span><br/><br/>
+            <i className="fa fa-phone" aria-hidden="true" style={{color:'#b19540',fontSize:'20px'}}></i>&ensp;<span style={{font:'20px serif',fontWeight:'bold'}}>27-001-360 &ensp; 74-200-320 </span><br/><br/>
+            <i className="fa fa-envelope-o" aria-hidden="true" style={{color:'#b19540',fontSize:'20px'}}></i>&ensp;<span style={{font:'20px serif',fontWeight:'bold'}}>Locationvoitures@info.com</span><br/><br/>
+            <i className="fa fa-map-marker" aria-hidden="true" style={{color:'#b19540',fontSize:'20px'}}></i>&ensp;<span style={{font:'20px serif',fontWeight:'bold'}}>Rue ibn Khaldun, Cité Taffala,<br/>&ensp;&ensp; 4003 Sousse Tunisie, TN</span><br/><br/>
             </Col>
             <Col>
             <form>
             <h4 style={{font:'30px librebaskerville',borderTop:'3px #b19540 solid', paddingTop:'20px',width:'730px',fontWeight:'bold'}}>Contactez-nous</h4><br/>
             <Label for='nom' style={{fontSize:'15px',fontWeight:'bold'}}> Name<span style={{color:'red'}}>*</span></Label>
-            <Row>
+            
+            {
+             isUserAuth? (
+            <></>
+             ) : (
+            <>
+              <Row>
                 <Col>
-                <Input type='text' name='nom' id='nom' placeholder='Saisie votre Nom'></Input></Col>
-                <Col><Input type='text' name='prenom' placeholder='Saisie votre Prénom'></Input></Col>
-            </Row>
-            <Label for='email' style={{fontSize:'15px',fontWeight:'bold' ,marginTop:'18px'}}> Email<span style={{color:'red'}}>*</span></Label>
-            <Row>
-                <Col><Input type='email' name='email' id='email' placeholder='Saisie votre Email'></Input></Col>
-            </Row>
-            <Label for='email' style={{fontSize:'15px',fontWeight:'bold' ,marginTop:'18px'}}> Message<span style={{color:'red'}}>*</span></Label>
+                <Input type='text' name='nom' id='nom' placeholder='Saisie votre Nom' onChange={ (e) => getInput(e) }></Input></Col>
+                <Col><Input type='text' name='prenom' placeholder='Saisie votre Prénom' onChange={ (e) => getInput(e) }></Input></Col>
+              </Row>
+              <Label for='email' style={{fontSize:'15px',fontWeight:'bold' ,marginTop:'18px'}}> Email<span style={{color:'red'}}>*</span></Label>
+              <Row>
+                  <Col><Input type='email' name='email' id='email' placeholder='Saisie votre Email' onChange={ (e) => getInput(e) }></Input></Col>
+              </Row> 
+            </>
+            )}
+            
+            <Label for='message' style={{fontSize:'15px',fontWeight:'bold' ,marginTop:'18px'}}> Message<span style={{color:'red'}}>*</span></Label>
            <Row>
                <Col>
-               <Input type='textarea' name='email' id='email' rows='5' placeholder='Saisie votre Message'></Input>
+               <Input type='text' name='message' id='message' rows='5' placeholder='Saisie votre Message' onChange={ (e) => getInput(e) }></Input>
                </Col>
            </Row>
            <Row><Col>
            <br/>
-           <Button type='submit'> Envoyer </Button></Col>
+           <Button type='submit' onClick={ (e) => sendForm(e) }> Envoyer </Button></Col>
            </Row>
            </form>
             </Col>
