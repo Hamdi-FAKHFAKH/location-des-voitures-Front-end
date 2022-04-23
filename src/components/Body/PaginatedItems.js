@@ -5,23 +5,24 @@ import Cartvoiture from './Cartvoiture';
 import { Container, Row } from 'reactstrap';
 // Example items, to simulate fetching from another resources.
 
-function Items({ currentItems }) {
-  return (
-    <>
-    <Container style={{marginTop:'40px'}}>
-      <Row>
-      { currentItems &&
-        currentItems.map((l,index) => (    
-            <Cartvoiture key={`${l.matricule} ${index}`} marque={l.marque} prix={l.prix_par_heure} score={l.color} desc = {l.desc} img={l.imageUrl} />
-        ))}
-    </Row>
-    </Container>
-    </>
-  );
-}
+
 //itemsPerPage nombre de itmes afficher dans chaque page
  
-export function PaginatedItems({ itemsPerPage }) {
+export function PaginatedItems({ itemsPerPage,setCmatricule }) {
+  function Items({ currentItems }) {
+    return (
+      <>
+      <Container style={{marginTop:'40px'}}>
+        <Row>
+        { currentItems &&
+          currentItems.map((l,index) => (    
+              <Cartvoiture key={`${l.matricule} ${index}`} marque={l.marque} prix={l.prix_par_heure} score={3} desc = {l.description} img={l.imageUrl} matricule={l.matricule} setCmatricule={setCmatricule} />
+          ))}
+      </Row>
+      </Container>
+      </>
+    );
+  }
   // We start with an empty list of items.
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);

@@ -34,24 +34,19 @@ export default function FormEntrepriser() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(owner)
             };
+            console.log(owner);
             fetch('http://localhost:3000/api/owner/signUp', requestOptions)
-              .then(( response ) => {
-                if(response.status === 201){
-                    window.location.href = "/connexion";
-                } else if( response.status === 400){
-                    console.log("des données qui doinvent étre unique mais qui sont déjà crées");
-                    setWrongConfidentials({ isWrong:true, message: "faux nom d'utilisateur ou faux mot de passe" })
-                } else if( response.status === 422 ) {
-                    console.log(response.statusText);
-                    setWrongConfidentials({ isWrong:true, message: response.statusText })
+              .then(( response ) => response.json())
+              .then( response => {
+                console.log(response);
 
+                if( response.err ){
+                    setWrongConfidentials({ isWrong:true, message: "error: " + response.err + " existe déjà" })
                 } else {
-                    console.log("une erreure inconnue est survenue ");
-                    setWrongConfidentials({ isWrong:true, message: "une erreure inconnue est survenue" })
-
+                    window.location.href = "/connexion";
                 }
-                }).catch( error => console.log("erreur signUp: ", error));
-        }
+              }).catch( error => console.log("erreur signUp: ", error));
+            }
 
         const style = {
             'color': 'red',

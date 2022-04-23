@@ -14,7 +14,7 @@ import FormEntrepriser from "components/Body/FormEntrepriser";
 import Contact from "components/Body/Contact";
 import Profile from './components/Body/Profile';
 import ProfileSociété from "components/Body/ProfileSociété";
-import { Pop } from "components/Body/Pop";
+
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -26,7 +26,6 @@ ReactDOM.render(
       <Route path="/profiles" render={(props) => <ProfileSociété {...props} />}/>
       <Route path="/contact" render={(props) => <Contact {...props} />}/>
       <Route path="/profile" render={(props) => <Profile {...props} />}/>
-      <Route path="/pop" render={(props) => <Pop {...props} />}/>
       <Redirect to="/index" />
 
     </Switch>

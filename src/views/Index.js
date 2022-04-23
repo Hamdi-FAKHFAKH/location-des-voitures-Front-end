@@ -1,12 +1,15 @@
 import React from "react";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
-import Cartvoiture from "components/Body/Cartvoiture";
-import { Container, Row } from "reactstrap";
-import { useEffect, useState } from "react";
 import Footer from "components/Footers/Footer";
-import { PaginatedItems } from "components/Body/PaginatedItems";
+import CarcontextProvider from "context/Carcontext";
+import Home from "components/Body/Home";
+
+
 function Index() {
+ 
+  //const [idcar,setidcar] = React.useState();
+  //const [Cmatricule,setCmatricule]= React.useState('0000');
   return (
     <>
   <div className='imageDeFond'></div>
@@ -14,7 +17,9 @@ function Index() {
   <IndexNavbar />
    <IndexHeader/>
   <div className="main" >
-  <PaginatedItems itemsPerPage={6}/>
+  <CarcontextProvider>
+    <Home/>
+  </CarcontextProvider>
      </div>
      <br/><br/>
      <Footer/>

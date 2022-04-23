@@ -150,9 +150,6 @@ function IndexNavbar() {
               <NavLink href="/index">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="">About Us </NavLink>
-            </NavItem>
-            <NavItem>
               <NavLink href="/service">Services</NavLink>
             </NavItem>
             <NavItem>

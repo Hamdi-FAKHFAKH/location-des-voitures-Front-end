@@ -50,7 +50,7 @@ export default function InfoSociété() {
         .then(response => response.json())
         .then( owner => {
           setOwnerDetails(owner)
-          console.log(owner.motDePasse);
+          owner&&console.log(owner.motDePasse);
         })
         .catch(err => console.error(err));
       }
@@ -86,7 +86,9 @@ export default function InfoSociété() {
     });
 
   return (
-    <div>   
+    
+    <div>  
+      {ownerDetails? 
         <Container>
         <h2 style={{fontWeight:'bold',font:'50px serif'}}> Gérer compte </h2>
         <br/>
@@ -196,6 +198,7 @@ export default function InfoSociété() {
         </Row>
         </Form>
         </Container>
+        :<div>errrrue</div>}
     </div>
   )
 }

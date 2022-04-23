@@ -1,0 +1,190 @@
+import { Carcontext } from 'context/Carcontext';
+import React,{ useContext }  from 'react'
+import { Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Row } from 'reactstrap';
+import { Icon } from '@iconify/react';
+export default function CarReservation() {
+    const {setvuehome,infocar} = useContext(Carcontext);
+  return (
+    <>
+    <br/><br/>
+    <Container>
+      <Row>
+        <Col style={{width:'900px'}}>
+          <Card style={{backgroundColor:'rgba(255,255,255,0.2)',width:'670px'}}>
+            <CardHeader style={{backgroundColor:'#333333',color:'#ffff',padding: '16px',fontWeight:'bold'}}>Information Client</CardHeader> 
+            <CardBody>
+              <CardText>
+                <br/>
+                <Form className="register-form" > 
+                    <Row>
+                      <Col>
+                        <Label> Prénom : </Label>
+                        <InputGroup>
+                            <Input placeholder="saisie votre Prénom" type="text"  />
+                            <InputGroupAddon addonType="append">
+                                <InputGroupText><i aria-hidden={true} className="fa fa-group" /></InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
+                      </Col>
+                      <Col>
+                        <Label> Nom :</Label>
+                        <InputGroup>
+                          <Input placeholder="saisie votre Nom" type="text" />
+                          <InputGroupAddon addonType="append">
+                          <InputGroupText>
+                              <i aria-hidden={true} className="fa fa-group" />
+                          </InputGroupText>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <br/>
+                    <Row>
+                      <Col>
+                        <Label> Email :</Label>
+                        <InputGroup>
+                            <Input placeholder="Email" type="email" />
+                            <InputGroupAddon addonType="append">
+                            <InputGroupText>
+                                <i aria-hidden={true} className="fa fa-envelope-o" />
+                            </InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
+                      </Col>
+                      <Col>
+                        <Label> Telephone :</Label>
+                        <InputGroup>
+                            <Input placeholder="Téléphone" type="text" />
+                            <InputGroupAddon addonType="append">
+                            <InputGroupText>
+                                <i aria-hidden={true} className="fa fa-phone" />
+                            </InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <br/>
+                    <Row>
+                      <Col>
+                        <Label> CIN :</Label>
+                        <InputGroup>
+                            <Input placeholder="N° CIN" type="text"  />
+                            <InputGroupAddon addonType="append">
+                            <InputGroupText>
+                                <i aria-hidden={true} className="fa fa-id-card-o" />
+                            </InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
+                      </Col>
+                      <Col>
+                        <Label> Date de Naissance :</Label>
+                        <InputGroup>
+                            <Input placeholder="Date de Naissance " type="text" onFocus={(e)=>e.target.type = 'date'} onBlur={(e)=>e.target.type = 'text'}  />
+                            <InputGroupAddon addonType="append">
+                            <InputGroupText>
+                                <i aria-hidden={true} className="fa fa-calendar" />
+                            </InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
+                      </Col> 
+                    </Row>
+                    <br/>
+                    <Row>
+                      <Col>
+                        <Label> Pseudo :</Label>        
+                        <InputGroup>
+                          <Input placeholder="Pseudo" type="text" />
+                          <InputGroupAddon addonType="append">
+                          <InputGroupText>
+                              <i aria-hidden={true} className="fa fa-user-circle" />
+                          </InputGroupText>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </Col> 
+                      <Col>
+                        <Label> Mot de Passe :</Label>                        
+                        <InputGroup>
+                            <Input placeholder="Mot de Passe " type="password" />
+                            <InputGroupAddon addonType="append">
+                            <InputGroupText>
+                                <i aria-hidden={true} className="fa fa-key" />
+                            </InputGroupText>
+                            </InputGroupAddon>
+                        </InputGroup>
+                      </Col>
+                    </Row>
+                    <br/>
+                    <Row>
+                    <Col>
+                    <Label> Options supplémentaires(Optionnel):</Label>  
+                    <Input type='textarea' rows='4' placeholder='saisie des option supplémentaire'/>
+                    </Col>  
+                    </Row>
+                    <br/>
+                    <Row>
+                    <Label> Options supplémentaires(Optionnel):</Label>
+                    <Col style={{font:'20px librebaskerville'}}>
+                    <strong><Icon icon="icon-park-outline:gps" width="30" height="30"/> GPS </strong> <input type={'checkbox'}/>&ensp;&ensp;
+                    <strong><Icon icon="mdi:car-child-seat" width="30" height="30" /> Siège enfant </strong> <input type={'checkbox'}/>&ensp;&ensp;
+                    <strong><Icon icon="icon-park-outline:baby-car-seat" width="30" height="30" /> Siège bébé </strong> <input type={'checkbox'}/>&ensp;&ensp;
+                    <strong><Icon icon="icon-park-outline:booster-car-seat" width="30" height="30" /> Rehausseur </strong> <input type={'checkbox'}/>
+                    </Col>  
+                    </Row>
+                    <br/>
+                    <Row>
+                      <Col>            
+                        <Button block className="btn-round" color="success" type='submit' onClick={e=>setvuehome()}>RESERVER</Button>
+                      </Col>
+                      <Col>            
+                        <Button block className="btn-round" color="secondary" type='submit' onClick={e=>setvuehome()}>ANNULER</Button>
+                      </Col>                
+                    </Row> 
+                </Form>
+              </CardText>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col>
+
+          <Card style={{backgroundColor:'rgba(255,255,255,0.2)',width:'400px'}}>
+            <CardHeader style={{backgroundColor:'#333333',color:'#ffff',padding: '16px',fontWeight:'bold'}}>RÉCAPITULATIF</CardHeader> 
+            <CardBody>
+              <br/>
+                <Row>
+                <Col lg='auto'>
+                <div style={{margin:'0px 0px 0px 20px',font:'30px librebaskerville'}}> <strong>{infocar.marque}</strong></div>
+                <div style={{margin:'15px 20px',font:'17px librebaskerville'}}> Du 23 avril 2022 à 10:00 <br/>
+                <strong>Prise : Aéroport Tunis Carthage</strong></div>
+                <div style={{margin:'0px 0px 10px 20px',font:'17px librebaskerville'}}> Du 23 avril 2022 à 10:00 <br/>
+                <strong>Remise : Aéroport Tunis Carthage</strong></div>
+                <img src={infocar.image} alt='not found'style={{ float:'left' ,borderRadius: '10px',margin:'12px 20px 30px 6px',height:'250px',width:'350px'}}/> 
+                <br/><br/>
+                <div style={{margin:'40px 20px'}}> 
+                <div style={{marginBottom:'20px',font:'20px librebaskerville'}} title='matricule de voiture'> 
+                          <i class="fa fa-registered" aria-hidden="true"></i> {infocar.matricule} 
+                          &ensp;&ensp;&ensp;<i class="fa fa-suitcase" aria-hidden="true"></i>&ensp;2 Valises
+                      </div>
+                      <div style={{marginBottom:'20px',font:'20px librebaskerville'}} title='Prix par Heure'>
+                        <i class="fa fa-money" aria-hidden="true"></i>&ensp;{infocar.prix} DT/Heure
+                        &ensp;&ensp;<i class="fa fa-snowflake-o" aria-hidden="true"></i>&ensp;climatisé 
+                      </div>
+                      <div style={{marginBottom:'20px',font:'20px librebaskerville'}} title='nombre de place'>
+                        <i class="fa fa-users" aria-hidden="true"></i>&ensp;4 personnes &ensp;&ensp;&ensp; 
+                        <Icon icon="ion:speedometer" />&ensp;100 Km/Heure 
+                        </div>
+                      <div style={{marginBottom:'20px',font:'20px librebaskerville'}} title='nombre de place'>
+                        <Icon icon="mdi:car-door" />&ensp;4 portes 
+                        &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<Icon icon="tabler:manual-gearbox" /> Manuelle
+                        </div>
+                  </div>
+                <div style={{font:'30px librebaskerville',margin:'0px -15px -20px -20px', background:'gray',padding:'10px',width:'400px',textAlign:'center'}}> Prix Total : 60 DT </div>
+                  </Col>
+                  </Row>
+              </CardBody>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+    </>
+  )
+}

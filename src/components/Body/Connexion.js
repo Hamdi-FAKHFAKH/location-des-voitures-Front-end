@@ -1,6 +1,6 @@
 
 import IndexNavbar from "components/Navbars/IndexNavbar";
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 
 // reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";

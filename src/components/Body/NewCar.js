@@ -85,7 +85,7 @@ export default function NewCar({vue,setvue}) {
               <Col>
               <Label style={{fontSize:'15px',fontWeight:'bold' ,marginTop:'18px'}}> Description <span style={{color:'red'}}>*</span></Label>
                     <InputGroup>
-                        <Input placeholder="Description de la voiture" type="textarea"  rows='5' name="description" onChange={ (e) => getInput(e) }/>
+                        <Input placeholder="Description de la voiture" type="textarea"  rows='5' minLength={80} maxLength={120} name="description" onChange={ (e) => getInput(e) }/>
                     </InputGroup>
                     <Label style={{fontSize:'15px',fontWeight:'bold' ,marginTop:'18px'}}> Choisit l'image de la voiture <span style={{color:'red'}}>*</span></Label>
                     <FormGroup>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Pop} from './Pop'
-import '../../assets/css/pop.scss'
+
 export default function Profile() {
     function GetAllVoitures() {
         const requestOptions = {
@@ -23,6 +22,6 @@ export default function Profile() {
             }).catch( error => console.log("erreur signUp: ", error));
     }
   return (
-   <div> <Pop/></div>
+   <div> </div>
   )
 }

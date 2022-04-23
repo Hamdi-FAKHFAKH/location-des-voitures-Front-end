@@ -67,7 +67,7 @@ function SectionJavaScript() {
                 Launch demo modal
               </Button>
               {/* Modal */}
-              <Modal isOpen={modal} toggle={toggleModal}>
+              <Modal isOpen={modal} toggle={toggleModal} style={{zIndex:'2147483647'}}>
                 <div className="modal-header">
                   <button
                     aria-label="Close"

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { Button, Container, Row } from 'reactstrap'
-import CartVoitureUp from './CartVoitureUp'
+import Cartvoiture from './Cartvoiture';
 
 export default function Listeofcar({vue,setvue}) {
 
@@ -53,6 +53,7 @@ export default function Listeofcar({vue,setvue}) {
 
   useEffect(()=> {
     getMesVoitures();
+    console.log(mesVoitures);
   },[vue])
 
 
@@ -63,11 +64,11 @@ export default function Listeofcar({vue,setvue}) {
     <Row>
     {
       mesVoitures? mesVoitures.map((l,index) => (
-          <CartVoitureUp key={l.nom+index} nom={l.nom} prix={l.prix} score={l.color} desc = {l.desc} img={l.imageUrl} />
+          <Cartvoiture key={l._id} marque={l.marque} prix={l.prix_par_heure} score={3} desc = {l.description} img={l.imageUrl} />
       )) : null
       }
   </Row>
-  
+  <br/>
         <Button onClick={()=>setvue('vuedeformV')} style={{height:'50px',width:'50px'}} color="success"><span style={{fontSize:'20px',fontWeight:'bold'}}>+</span></Button><br/><br/>
   </Container></div>
   )

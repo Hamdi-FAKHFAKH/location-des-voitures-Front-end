@@ -53,15 +53,6 @@ export default function Service() {
         <p style={{fontSize:'20px' ,fontStyle:'oblique', color:'black'}}>Si vous avez besoin d'un transfert vers  l'aéroport et vous avez plusieurs bagage et vous avez besoin d'un voiture confort nous vous offre multiple choix de voiture qui satisfaire votre besoin</p>
         </Col>
     </Row>
-    <Row style={{padding:'50px 0 '}}>
-        <Col lg='4'>
-         <h6 style={{fontSize:'20px',borderTop:'3px solid #b19540'}}><br/>Transferts des Colis </h6>
-        </Col>
-        <Col>
-        <p style={{fontSize:'20px',borderTop:'3px solid #b19540',fontWeight:'bold'}}><br/>Nous vous assure un transfert des colis de façon sécuriser tous en respectant le temps d'arrive </p>
-        <p style={{fontSize:'20px' ,fontStyle:'oblique', color:'black'}}>Si vous avez besoin de transférer vos colis vers une autre ville ou même dans votre ville tout en respectant les termes de sécurité et rapidité vous est dans le meilleur endroit</p>
-        </Col>
-    </Row>
     <h1 style={{borderBottom:'2px solid #b19540', paddingBottom:'15px' , marginBottom:'30px'}}>Avis Clients</h1>
     <Row>
       <Col>

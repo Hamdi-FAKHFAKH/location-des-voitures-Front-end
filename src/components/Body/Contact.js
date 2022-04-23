@@ -5,8 +5,7 @@ import '../../assets/css/filter.css'
 import { Button, Col, Container, Input, Label, Row } from 'reactstrap';
 import Footer from 'components/Footers/Footer';
 export default function Contact() {
-    const ref = React.useRef(null);
-const [map, setMap] = useState();
+const [succes, setsucces] = useState(false);
 
 
 function getCookie(cname) {
@@ -25,12 +24,6 @@ function getCookie(cname) {
   return "";
 }
 
-
-useEffect(() => {
-  if (ref.current && !map) {
-    setMap(new window.google.maps.Map(ref.current, {}));
-  }
-}, [ref, map]);
 
 
 /**************** is USER authentified **************/
@@ -71,7 +64,10 @@ async function sendForm(e){
       body: JSON.stringify(Form)
   };
   try{
-    await fetch('http://localhost:3000/api/message/postmessage', requestOptions);
+    let rep = await fetch('http://localhost:3000/api/message/postmessage', requestOptions);
+    rep.status === 201 &&setsucces(true);
+    console.log(rep.status);
+    console.log(succes);
   } catch {
     console.log("error");
   }
@@ -81,6 +77,7 @@ const [ Form, setForm ] = useState({})
 function getInput(e){
   setForm({ ...Form, [e.target.name]: e.target.value })
 }
+
 
 
   return (
@@ -134,12 +131,14 @@ function getInput(e){
            <Row><Col>
            <br/>
            <Button type='submit' onClick={ (e) => sendForm(e) }> Envoyer </Button></Col>
+           {succes&&<span style={{color:'green',fontWeight:'bold'}}> message envoyer avec succés </span>}
            </Row>
            </form>
             </Col>
         </Row>
         <h4 style={{font:'20px serif ' , borderTop:'3px #b19540 solid', paddingTop:'20px', marginTop:'70px'}}>Louer une voiture tout de suite !</h4>
         <h1 style={{fontWeight:'bold',textAlign:'center' , marginBottom:'50px' , fontSize:"115px" }} > 74 - 200 - 320 </h1>
+        
         </Container>
         <Footer/>
     </div>

@@ -7,7 +7,7 @@ function Footer() {
     <footer className="footer footer-black footer-white" style={{backgroundColor:'#C9D6DF'}}>
       <Container>
         <Row>
-          <nav className="footer-nav">
+          <nav className="footer-nav" style={{width:'300px'}}>
             <ul>
               <li>
                 <a
@@ -35,7 +35,7 @@ function Footer() {
               </li>
             </ul>
           </nav>
-          <div className="credits ml-auto">
+          <div className="credits ml-auto" style={{width:'300px'}}>
             <span className="copyright">
               © {new Date().getFullYear()}, made with{" "}
               <i className="fa fa-heart heart" /> by H&A Tim
