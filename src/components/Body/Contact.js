@@ -103,13 +103,14 @@ function getInput(e){
             <Col>
             <form>
             <h4 style={{font:'30px librebaskerville',borderTop:'3px #b19540 solid', paddingTop:'20px',width:'730px',fontWeight:'bold'}}>Contactez-nous</h4><br/>
-            <Label for='nom' style={{fontSize:'15px',fontWeight:'bold'}}> Name<span style={{color:'red'}}>*</span></Label>
+           
             
             {
              isUserAuth? (
             <></>
              ) : (
             <>
+             <Label for='nom' style={{fontSize:'15px',fontWeight:'bold'}}> Name<span style={{color:'red'}}>*</span></Label>
               <Row>
                 <Col>
                 <Input type='text' name='nom' id='nom' placeholder='Saisie votre Nom' onChange={ (e) => getInput(e) }></Input></Col>
@@ -125,7 +126,7 @@ function getInput(e){
             <Label for='message' style={{fontSize:'15px',fontWeight:'bold' ,marginTop:'18px'}}> Message<span style={{color:'red'}}>*</span></Label>
            <Row>
                <Col>
-               <Input type='text' name='message' id='message' rows='5' placeholder='Saisie votre Message' onChange={ (e) => getInput(e) }></Input>
+               <Input type='textarea' rows='5' name='message' id='message' row='5' placeholder='Saisie votre Message' onChange={ (e) => getInput(e) }></Input>
                </Col>
            </Row>
            <Row><Col>

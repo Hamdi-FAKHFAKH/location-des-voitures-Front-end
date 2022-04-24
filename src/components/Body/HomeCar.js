@@ -1,26 +1,58 @@
-import React from 'react'
+import { Carcontext } from 'context/Carcontext';
+import React,{useContext,useEffect} from 'react'
 import ReactDatetimeClass from 'react-datetime'
+
 import { Button, Col, Container, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap'
 import { PaginatedItems } from './PaginatedItems'
 
 export default function HomeCar() {
   const [checked, setChecked] = React.useState(false);
-  function getCurrentDate(separator='/',houre=0){
+  const {setinfoRes,infoRes,infocar} = useContext(Carcontext);
 
+  function getCurrentDate(separator='/',houre=0){
     let newDate = new Date()
     let date = newDate.getDate();
     let month = newDate.getMonth() + 1;
     let year = newDate.getFullYear();
     var hours = newDate.getHours()+houre;
     var minutes = newDate.getMinutes();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
-    
+    if(hours >23)
+    {
+      date = date +1 ;
+      hours = hours - 24;
+    }
+    var strTime = hours + ':' + minutes 
     return `${date}${separator}${month<10?`0${month}`:`${month}`}${separator}${year} ${strTime}`
     }
+  const dateRes = e =>{
+    var hstot = parseInt(infoRes.hdep) + parseInt(e.target.value); 
+    var date = infoRes.dateDep;
+    if (hstot > 23 ){ 
+      hstot = hstot - 24 ;
+      const day = parseInt(infoRes.dateDep.substr(0,2)) + 1 ;
+      date = date.substr(3,8);
+      date = `${day}/${date}`
+      console.log(day);
+      console.log(infoRes.dateRet)
+    }
+    setinfoRes({...infoRes,nbheure:e.target.value,tempsRet:`${hstot}:${infoRes.mindep}`,dateRet:date})
+  }
+    
+  const setdateRes = (e,h) =>{
+    var day = e.format('DD');
+    var houre = e.format('HH');
+    const min = e.format('mm');
+    houre = parseInt(houre) + parseInt(h)
+    if(houre>23){
+      day = parseInt(day) + 1;
+      houre = houre - 24 ;
+    }
+    let month = parseInt(e.format('MM'));
+    let year = e.format('YYYY');
+    setinfoRes({...infoRes,dateDep:e.format("DD/MM/YYYY"),tempsDep:e.format("HH:mm"),hdep:e.format("HH"),mindep:e.format("mm"),dateRet:`${day}/${month<10?`0${month}`:`${month}`}/${year}`,tempsRet:`${houre}:${min}`})
+  }
+  
+  
   return ( 
     <>
     <br/>
@@ -32,18 +64,18 @@ export default function HomeCar() {
     <Row>
     <Col>
     <label htmlFor={'select'}> Agence de prise en charge </label>
-    <Input type={'select'} id='select' defaultValue={'ATunis'} style={{width:'350px',marginBottom:'5px'}}>
+    <Input type={'select'} id='select' defaultValue={'Aéroport Tunis Carthage'} style={{width:'350px',marginBottom:'5px'}} onChange={e=>{setinfoRes({...infoRes,depart:e.target.value,retour:e.target.value});console.log(infoRes)}}>
     <optgroup label="Aéroport">
 									
-                  <option value="ADjerba">Aéroport Djerba</option>
+                  <option value="Aéroport Djerba">Aéroport Djerba</option>
                 
-                  <option value="AEnfidha">Aéroport Enfidha</option>
+                  <option value="Aéroport Enfidha">Aéroport Enfidha</option>
                 
-                  <option value="AMonastir">Aéroport Monastir</option>
+                  <option value="Aéroport Monastir">Aéroport Monastir</option>
                 
-                  <option value="ATunis" >Aéroport Tunis Carthage</option>
+                  <option value="Aéroport Tunis Carthage" >Aéroport Tunis Carthage</option>
 
-                  <option value="ASfax">Aéroport Sfax </option>
+                  <option value="Aéroport Sfax">Aéroport Sfax </option>
                 
     </optgroup>
     <optgroup label="Centre ville">
@@ -67,37 +99,40 @@ export default function HomeCar() {
 									
 		</optgroup>
     </Input>
-    {checked&&<><label for={'select'}> Agence de restitution </label>
-    <Input type={'select'} id='select' style={{width:'350px',marginBottom:'5px'}}>
+    {checked&&<><label > Agence de restitution </label>
+    <Input type={'select'} id='select' style={{width:'350px',marginBottom:'5px'}} defaultValue={'ATunis'} onChange={e=>{setinfoRes({...infoRes,retour:e.target.value});console.log(infoRes)}}>
     <optgroup label="Aéroport">
 									
-                  <option value="5">Aéroport Djerba</option>
+                  <option value="Aéroport Djerba">Aéroport Djerba</option>
                 
-                  <option value="2">Aéroport Enfidha</option>
+                  <option value="Aéroport Enfidha">Aéroport Enfidha</option>
                 
-                  <option value="3">Aéroport Monastir</option>
+                  <option value="Aéroport Monastir">Aéroport Monastir</option>
                 
-                  <option value="1" selected="">Aéroport Tunis Carthage</option>
+                  <option value="Aéroport Tunis Carthage">Aéroport Tunis Carthage</option>
+
+                  <option value="Aéroport Sfax">Aéroport Sfax </option>
                 
     </optgroup>
     <optgroup label="Centre ville">
 									
-										<option value="21">Djerba</option>
+                  <option value="Djerba">Djerba</option>
 									
-										<option value="19">Hammamet</option>
-									
-										<option value="25">La marsa</option>
-									
-										<option value="24">Monastir</option>
-									
-										<option value="18">Nabeul</option>
-									
-										<option value="20">Sousse</option>
-									
-										<option value="22">Tozeur</option>
-									
-										<option value="17">Tunis</option>
-									
+                  <option value="Hammamet">Hammamet</option>
+                
+                  <option value="La marsa">La marsa</option>
+                
+                  <option value="Monastir">Monastir</option>
+                
+                  <option value="Nabeul">Nabeul</option>
+                
+                  <option value="Sousse">Sousse</option>
+                
+                  <option value="Tozeur">Tozeur</option>
+                
+                  <option value="Tunis">Tunis</option>
+
+                  <option value="Sfax">Sfax</option>
 		</optgroup>
     </Input></>}
     <input type='checkbox'  defaultChecked={checked} onChange={() => setChecked(!checked)}/> Agence de restitution différente
@@ -112,8 +147,11 @@ export default function HomeCar() {
                         inputProps={{
                           placeholder: "Date de retrait",
                         }}
+
                         dateFormat={'DD/MM/YYYY'}
-                        
+                        timeFormat={'HH:mm'}
+                        onChange={e=>{setdateRes(e,infoRes.nbheure)}}
+                       
                       />
                       <InputGroupAddon addonType="append">
                         <InputGroupText>
@@ -126,7 +164,7 @@ export default function HomeCar() {
     </FormGroup>
     </Col>
     <Col>
-    <label> Date de retour </label>
+    {/* <label> Date de retour </label>
     <FormGroup style={{width:'220px'}}>
                     <InputGroup className="date" id="datetimepicker">
                       <ReactDatetimeClass
@@ -134,7 +172,10 @@ export default function HomeCar() {
                         inputProps={{
                           placeholder: "Date de retour",
                         }}
-                        dateFormat={'DD/MM/YYYY'}
+                        dateFormat ={false}
+                        timeFormat ={`${infoRes.dateDep} HH:mm`}
+                        onChange={e=>{setinfoRes({...infoRes,dateRet:e.format("DD/MM/YYYY"),tempsRet:e.format("HH:mm")});console.log(infoRes)}}
+                        
                       />
                       <InputGroupAddon addonType="append">
                         <InputGroupText>
@@ -144,6 +185,19 @@ export default function HomeCar() {
                         </InputGroupText>
                       </InputGroupAddon>
                     </InputGroup>
+    </FormGroup> */}
+    <label> Nombre de Heure </label>
+    <FormGroup style={{width:'220px'}}>
+    <InputGroup className="date" id="datetimepicker">
+      <Input type='number' placeholder='Nombre de heure' min={1} defaultValue={infoRes.nbheure} onChange={e=>dateRes(e)} />
+      <InputGroupAddon addonType="append">
+                        <InputGroupText>
+                          <span className="glyphicon glyphicon-calendar">
+                          <i className="fa fa-clock-o" aria-hidden="true"></i>
+                          </span>
+                        </InputGroupText>
+                      </InputGroupAddon>
+      </InputGroup>
     </FormGroup>
     </Col>
     <Col>

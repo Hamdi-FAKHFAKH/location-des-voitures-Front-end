@@ -8,7 +8,7 @@ import { Container, Row } from 'reactstrap';
 
 //itemsPerPage nombre de itmes afficher dans chaque page
  
-export function PaginatedItems({ itemsPerPage,setCmatricule }) {
+export function PaginatedItems({ itemsPerPage }) {
   function Items({ currentItems }) {
     return (
       <>
@@ -16,7 +16,7 @@ export function PaginatedItems({ itemsPerPage,setCmatricule }) {
         <Row>
         { currentItems &&
           currentItems.map((l,index) => (    
-              <Cartvoiture key={`${l.matricule} ${index}`} marque={l.marque} prix={l.prix_par_heure} score={3} desc = {l.description} img={l.imageUrl} matricule={l.matricule} setCmatricule={setCmatricule} />
+              <Cartvoiture key={`${l.matricule} ${index}`} marque={l.marque} prix={l.prix_par_heure} score={3} desc = {l.description} img={l.imageUrl} matricule={l.matricule} titre={'louer'}/>
           ))}
       </Row>
       </Container>

@@ -1,6 +1,7 @@
 import ContactHeader from 'components/Headers/ContactHeader'
 import IndexNavbar from 'components/Navbars/IndexNavbar'
 import ProfileNavbar from 'components/Navbars/ProfileNavbar'
+import CarcontextProvider from 'context/Carcontext'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Col, Container, Row } from 'reactstrap'
@@ -24,6 +25,7 @@ export default function ProfileSociété() {
   return (
     <>
     <div className='imageDeFond'></div>
+
     <div className='contenu' style={{backgroundColor:'rgba(255,255,255,0.8)'}}>
         <ProfileNavbar/>
         <br/><br/><br/>
@@ -36,9 +38,11 @@ export default function ProfileSociété() {
             </Col>
             
             <Col>
-            <h1 style={{textAlign:'center',fontWeight:'bold'}}>Bienvenue dans votre profile</h1>
+            <h1 style={{textAlign:'center',fontWeight:'bold'}}>Bienvenue dans votre profil</h1>
+
+            <CarcontextProvider>
             {vue==='vue1'?<InfoSociété/>:<GestionVoitures/>}
-            
+            </CarcontextProvider>
             </Col>
         </Row>
         

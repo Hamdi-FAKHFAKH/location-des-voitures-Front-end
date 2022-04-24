@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react'
 import { Button, Container, Row } from 'reactstrap'
 import Cartvoiture from './Cartvoiture';
@@ -64,7 +62,7 @@ export default function Listeofcar({vue,setvue}) {
     <Row>
     {
       mesVoitures? mesVoitures.map((l,index) => (
-          <Cartvoiture key={l._id} marque={l.marque} prix={l.prix_par_heure} score={3} desc = {l.description} img={l.imageUrl} />
+        <Cartvoiture key={`${l.matricule} ${index}`} marque={l.marque} prix={l.prix_par_heure} score={3} desc = {l.description} img={l.imageUrl} matricule={l.matricule} titre={'voir plus'}/>
       )) : null
       }
   </Row>

@@ -1,9 +1,15 @@
 import { Carcontext } from 'context/Carcontext';
-import React,{ useContext }  from 'react'
+import React,{ useContext ,useEffect}  from 'react'
 import { Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Row } from 'reactstrap';
 import { Icon } from '@iconify/react';
 export default function CarReservation() {
-    const {setvuehome,infocar} = useContext(Carcontext);
+    const {setvuehome,infocar,infoRes,setinfoRes} = useContext(Carcontext);
+    useEffect(()=>
+    {
+      setinfoRes({...infoRes,prix:infocar.prix * infoRes.nbheure });
+    },[]
+    )
+    
   return (
     <>
     <br/><br/>
@@ -13,17 +19,15 @@ export default function CarReservation() {
           <Card style={{backgroundColor:'rgba(255,255,255,0.2)',width:'670px'}}>
             <CardHeader style={{backgroundColor:'#333333',color:'#ffff',padding: '16px',fontWeight:'bold'}}>Information Client</CardHeader> 
             <CardBody>
-              <CardText>
+              
                 <br/>
                 <Form className="register-form" > 
                     <Row>
                       <Col>
                         <Label> Prénom : </Label>
                         <InputGroup>
-                            <Input placeholder="saisie votre Prénom" type="text"  />
-                            <InputGroupAddon addonType="append">
+                            <Input placeholder="saisie votre Prénom" type="text"/>
                                 <InputGroupText><i aria-hidden={true} className="fa fa-group" /></InputGroupText>
-                            </InputGroupAddon>
                         </InputGroup>
                       </Col>
                       <Col>
@@ -140,7 +144,7 @@ export default function CarReservation() {
                       </Col>                
                     </Row> 
                 </Form>
-              </CardText>
+              
             </CardBody>
           </Card>
         </Col>
@@ -152,24 +156,24 @@ export default function CarReservation() {
               <br/>
                 <Row>
                 <Col lg='auto'>
-                <div style={{margin:'0px 0px 0px 20px',font:'30px librebaskerville'}}> <strong>{infocar.marque}</strong></div>
-                <div style={{margin:'15px 20px',font:'17px librebaskerville'}}> Du 23 avril 2022 à 10:00 <br/>
-                <strong>Prise : Aéroport Tunis Carthage</strong></div>
-                <div style={{margin:'0px 0px 10px 20px',font:'17px librebaskerville'}}> Du 23 avril 2022 à 10:00 <br/>
-                <strong>Remise : Aéroport Tunis Carthage</strong></div>
-                <img src={infocar.image} alt='not found'style={{ float:'left' ,borderRadius: '10px',margin:'12px 20px 30px 6px',height:'250px',width:'350px'}}/> 
+                <div style={{margin:'-17px 0px 0px 20px',font:'30px librebaskerville'}}> <strong>{infocar.marque}</strong></div>
+                <div style={{margin:'15px 20px',font:'17px librebaskerville'}}> Du {infoRes.dateDep} à {infoRes.tempsDep} <br/>
+                <strong>Prise :{infoRes.depart}</strong></div>
+                <div style={{margin:'0px 0px 10px 20px',font:'17px librebaskerville'}}> Du {infoRes.dateRet} à {infoRes.tempsRet}<br/>
+                <strong>Remise : {infoRes.retour}</strong></div>
+                <img src={infocar.image} alt='not found'style={{ float:'left' ,borderRadius: '10px',margin:'6px 20px 30px 6px',height:'250px',width:'350px'}}/> 
                 <br/><br/>
-                <div style={{margin:'40px 20px'}}> 
+                <div style={{margin:'30px 20px'}}> 
                 <div style={{marginBottom:'20px',font:'20px librebaskerville'}} title='matricule de voiture'> 
-                          <i class="fa fa-registered" aria-hidden="true"></i> {infocar.matricule} 
-                          &ensp;&ensp;&ensp;<i class="fa fa-suitcase" aria-hidden="true"></i>&ensp;2 Valises
+                          <i className="fa fa-registered" aria-hidden="true"></i> {infocar.matricule} 
+                          &ensp;&ensp;&ensp;<i className="fa fa-suitcase" aria-hidden="true"></i>&ensp;2 Valises
                       </div>
                       <div style={{marginBottom:'20px',font:'20px librebaskerville'}} title='Prix par Heure'>
-                        <i class="fa fa-money" aria-hidden="true"></i>&ensp;{infocar.prix} DT/Heure
-                        &ensp;&ensp;<i class="fa fa-snowflake-o" aria-hidden="true"></i>&ensp;climatisé 
+                        <i className="fa fa-money" aria-hidden="true"></i>&ensp;{infocar.prix} DT/Heure
+                        &ensp;&ensp;<i className="fa fa-snowflake-o" aria-hidden="true"></i>&ensp;climatisé 
                       </div>
                       <div style={{marginBottom:'20px',font:'20px librebaskerville'}} title='nombre de place'>
-                        <i class="fa fa-users" aria-hidden="true"></i>&ensp;4 personnes &ensp;&ensp;&ensp; 
+                        <i className="fa fa-users" aria-hidden="true"></i>&ensp;4 personnes &ensp;&ensp;&ensp; 
                         <Icon icon="ion:speedometer" />&ensp;100 Km/Heure 
                         </div>
                       <div style={{marginBottom:'20px',font:'20px librebaskerville'}} title='nombre de place'>
@@ -177,7 +181,7 @@ export default function CarReservation() {
                         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<Icon icon="tabler:manual-gearbox" /> Manuelle
                         </div>
                   </div>
-                <div style={{font:'30px librebaskerville',margin:'0px -15px -20px -20px', background:'gray',padding:'10px',width:'400px',textAlign:'center'}}> Prix Total : 60 DT </div>
+                <div style={{font:'30px librebaskerville',margin:'0px -15px -20px -20px', background:'gray',padding:'10px',width:'400px',textAlign:'center'}}> Prix Total : {infoRes.prix} DT </div>
                   </Col>
                   </Row>
               </CardBody>
