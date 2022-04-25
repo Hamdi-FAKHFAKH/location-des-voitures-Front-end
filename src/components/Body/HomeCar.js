@@ -1,5 +1,5 @@
 import { Carcontext } from 'context/Carcontext';
-import React,{useContext,useEffect} from 'react'
+import React,{useContext} from 'react'
 import ReactDatetimeClass from 'react-datetime'
 
 import { Button, Col, Container, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap'
@@ -9,7 +9,7 @@ export default function HomeCar() {
   const [checked, setChecked] = React.useState(false);
   const {setinfoRes,infoRes,infocar} = useContext(Carcontext);
 
-  function getCurrentDate(separator='/',houre=0){
+  function getCurrentDate(separator='-',houre=0){
     let newDate = new Date()
     let date = newDate.getDate();
     let month = newDate.getMonth() + 1;
@@ -49,7 +49,7 @@ export default function HomeCar() {
     }
     let month = parseInt(e.format('MM'));
     let year = e.format('YYYY');
-    setinfoRes({...infoRes,dateDep:e.format("DD/MM/YYYY"),tempsDep:e.format("HH:mm"),hdep:e.format("HH"),mindep:e.format("mm"),dateRet:`${day}/${month<10?`0${month}`:`${month}`}/${year}`,tempsRet:`${houre}:${min}`})
+    setinfoRes({...infoRes,dateDep:e.format("DD-MM-YYYY"),tempsDep:e.format("HH:mm"),hdep:e.format("HH"),mindep:e.format("mm"),dateRet:`${day}-${month<10?`0${month}`:`${month}`}-${year}`,tempsRet:`${houre}:${min}`})
   }
   
   
@@ -143,12 +143,12 @@ export default function HomeCar() {
     <FormGroup style={{width:'220px'}}>
                     <InputGroup className="date" id="datetimepicker">
                       <ReactDatetimeClass
-                       initialValue={getCurrentDate('/',1)}
+                       initialValue={getCurrentDate('-',1)}
                         inputProps={{
                           placeholder: "Date de retrait",
                         }}
 
-                        dateFormat={'DD/MM/YYYY'}
+                        dateFormat={'DD-MM-YYYY'}
                         timeFormat={'HH:mm'}
                         onChange={e=>{setdateRes(e,infoRes.nbheure)}}
                        

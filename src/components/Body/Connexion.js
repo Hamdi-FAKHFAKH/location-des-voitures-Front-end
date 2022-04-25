@@ -73,17 +73,7 @@ function Connexion() {
     .catch(err => console.error("erreur hetha: ",err));
     }
 
-  const style = {
-    'color': 'red',
-    'zIndex': '-1',
-    'position':'absolute',
-    'bottom':'70px',
-    'left':'50px'
-  }
 
-  // useEffect(() => {
-  //   signOut();
-  // });
 
   return (
     <>
@@ -136,7 +126,7 @@ function Connexion() {
                   S'inscrire
                   </Button>
                 </Form>
-                { isWrongConfidentials && <span style={ style }> faux nom d'utilisateur ou faux mot de passe</span>}
+                { isWrongConfidentials && <span style={{ marginLeft:'50px',marginTop:'15px',color:'red'}}>faux pseudo ou mot de passe</span>}
                 <div className="forgot">
                   <Button
                     className="btn-link"

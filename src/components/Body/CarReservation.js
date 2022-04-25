@@ -1,5 +1,5 @@
 import { Carcontext } from 'context/Carcontext';
-import React,{ useContext ,useEffect}  from 'react'
+import React,{ useContext ,useEffect,useState}  from 'react'
 import { Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Row } from 'reactstrap';
 import { Icon } from '@iconify/react';
 export default function CarReservation() {
@@ -9,10 +9,52 @@ export default function CarReservation() {
       setinfoRes({...infoRes,prix:infocar.prix * infoRes.nbheure });
     },[]
     )
-    
+    //****************************************************************************** */
+    function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(";");
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    } 
+    const [ ownerDetails, setOwnerDetails ] = useState([]);
+    const getOwnerDetails = () => {
+      const requestOptions = {
+          method: 'Get',
+          headers: { 
+            'Content-Type': 'application/json', 
+            'Accept': 'application/json',
+            'Authorization': 'bearer '+getCookie("token")
+          },
+      };
+
+      fetch('http://localhost:3000/api/owner/'+getCookie("userId"), requestOptions)
+      .then(response => response.json())
+      .then( owner => {
+        setOwnerDetails(owner)
+        owner&&console.log(owner.motDePasse);
+      })
+      .catch(err => console.error(err));
+    }
+
+    useEffect(()=>{
+      getOwnerDetails()
+    },[])
+
   return (
+    
     <>
+    
     <br/><br/>
+    {ownerDetails&& 
     <Container>
       <Row>
         <Col style={{width:'900px'}}>
@@ -26,14 +68,14 @@ export default function CarReservation() {
                       <Col>
                         <Label> Prénom : </Label>
                         <InputGroup>
-                            <Input placeholder="saisie votre Prénom" type="text"/>
+                            <Input placeholder="saisie votre Prénom" type="text" defaultValue={ ownerDetails.prenom }disabled/>
                                 <InputGroupText><i aria-hidden={true} className="fa fa-group" /></InputGroupText>
                         </InputGroup>
                       </Col>
                       <Col>
                         <Label> Nom :</Label>
                         <InputGroup>
-                          <Input placeholder="saisie votre Nom" type="text" />
+                          <Input placeholder="saisie votre Nom" type="text"  defaultValue={ ownerDetails.nom }disabled/>
                           <InputGroupAddon addonType="append">
                           <InputGroupText>
                               <i aria-hidden={true} className="fa fa-group" />
@@ -47,7 +89,7 @@ export default function CarReservation() {
                       <Col>
                         <Label> Email :</Label>
                         <InputGroup>
-                            <Input placeholder="Email" type="email" />
+                            <Input placeholder="Email" type="email"  defaultValue={ ownerDetails.Email }disabled/>
                             <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 <i aria-hidden={true} className="fa fa-envelope-o" />
@@ -58,7 +100,7 @@ export default function CarReservation() {
                       <Col>
                         <Label> Telephone :</Label>
                         <InputGroup>
-                            <Input placeholder="Téléphone" type="text" />
+                            <Input placeholder="Téléphone" type="text" defaultValue={ ownerDetails.telephone }disabled />
                             <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 <i aria-hidden={true} className="fa fa-phone" />
@@ -72,7 +114,7 @@ export default function CarReservation() {
                       <Col>
                         <Label> CIN :</Label>
                         <InputGroup>
-                            <Input placeholder="N° CIN" type="text"  />
+                            <Input placeholder="N° CIN" type="text" defaultValue={'11113118'} disabled/>
                             <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 <i aria-hidden={true} className="fa fa-id-card-o" />
@@ -83,7 +125,7 @@ export default function CarReservation() {
                       <Col>
                         <Label> Date de Naissance :</Label>
                         <InputGroup>
-                            <Input placeholder="Date de Naissance " type="text" onFocus={(e)=>e.target.type = 'date'} onBlur={(e)=>e.target.type = 'text'}  />
+                            <Input placeholder="Date de Naissance " type="text" onFocus={(e)=>e.target.type = 'date'} onBlur={(e)=>e.target.type = 'text'} disabled />
                             <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 <i aria-hidden={true} className="fa fa-calendar" />
@@ -97,7 +139,7 @@ export default function CarReservation() {
                       <Col>
                         <Label> Pseudo :</Label>        
                         <InputGroup>
-                          <Input placeholder="Pseudo" type="text" />
+                          <Input placeholder="Pseudo" type="text"   defaultValue={ ownerDetails.pseudo } disabled/>
                           <InputGroupAddon addonType="append">
                           <InputGroupText>
                               <i aria-hidden={true} className="fa fa-user-circle" />
@@ -189,6 +231,7 @@ export default function CarReservation() {
         </Col>
       </Row>
     </Container>
+    }
     </>
   )
 }

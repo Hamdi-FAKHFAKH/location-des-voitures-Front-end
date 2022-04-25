@@ -10,7 +10,7 @@ export default class CarcontextProvider extends Component {
   minutes = this.minutes < 10 ? '0'+this.minutes : this.minutes;
   date = this.newDate.getDate();
 
-  getCurrentDate(separator='/',houre=0){
+  getCurrentDate(separator='-',houre=0){
 
     let newDate = new Date()
     let month = newDate.getMonth();
