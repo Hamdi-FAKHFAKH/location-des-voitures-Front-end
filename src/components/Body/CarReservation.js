@@ -3,6 +3,33 @@ import React,{ useContext ,useEffect,useState}  from 'react'
 import { Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Row } from 'reactstrap';
 import { Icon } from '@iconify/react';
 export default function CarReservation() {
+
+  async function reserver(){
+    setvuehome();
+    console.log("m: ",infoRes.dateDep +' '+infoRes.tempsDep);
+    console.log("s ",infoRes.dateRet + ' ' + infoRes.tempsRet);
+    console.log("infocar.id ",infocar);
+      const requestOptions = {
+          method: 'Post',
+          headers: { 
+            'Content-Type': 'application/json', 
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + getCookie("token")
+          },
+            body: JSON.stringify({ dateDep: infoRes.dateDep +' '+infoRes.tempsDep, dateRet: infoRes.dateRet + ' ' + infoRes.tempsRet, idVoiture: infocar.id })
+
+      };
+      console.log("reserver "+infoRes.dateDep + ' '+ infoRes.tempsDep + " " + infoRes.dateRet + ' ' + infoRes.tempsRet );
+      alert("reserver "+infoRes.dateDep + " " +infoRes.dateRet);
+      fetch('http://localhost:3000/api/reservation/', requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+          // setVoitures(data) 
+      })
+      .catch(err => console.error(err));   
+  }
+
     const {setvuehome,infocar,infoRes,setinfoRes} = useContext(Carcontext);
     useEffect(()=>
     {
@@ -179,8 +206,7 @@ export default function CarReservation() {
                     <br/>
                     <Row>
                       <Col>            
-                        <Button block className="btn-round" color="success" type='submit' onClick={e=>setvuehome()}>RESERVER</Button>
-                      </Col>
+                      <Button block className="btn-round" color="success" type='submit' onClick={ reserver }>RESERVER</Button>                      </Col>
                       <Col>            
                         <Button block className="btn-round" color="secondary" type='submit' onClick={e=>setvuehome()}>ANNULER</Button>
                       </Col>                

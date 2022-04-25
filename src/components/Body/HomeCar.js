@@ -49,7 +49,7 @@ export default function HomeCar() {
     }
     let month = parseInt(e.format('MM'));
     let year = e.format('YYYY');
-    setinfoRes({...infoRes,dateDep:e.format("DD-MM-YYYY"),tempsDep:e.format("HH:mm"),hdep:e.format("HH"),mindep:e.format("mm"),dateRet:`${day}-${month<10?`0${month}`:`${month}`}-${year}`,tempsRet:`${houre}:${min}`})
+    setinfoRes({...infoRes,dateDep:e.format("MM-DD-YYYY"),tempsDep:e.format("HH:mm"),hdep:e.format("HH"),mindep:e.format("mm"),dateRet:`${month<10?`0${month}`:`${month}`}-${day}-${year}`,tempsRet:`${houre}:${min}`})
   }
   
   

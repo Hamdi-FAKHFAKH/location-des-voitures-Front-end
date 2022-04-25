@@ -3,7 +3,7 @@ import '../../assets/css/icons.css'
 import { Button, Card, Col, Form } from 'reactstrap'
 import { Carcontext } from 'context/Carcontext';
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function ({marque,prix,score,desc,img,matricule,titre}) {
+export default function ({marque,prix,score,desc,img,matricule,titre,id}) {
   const{setinfocar,setvuehome} = useContext(Carcontext);
   return (   
    <Col style={{textAlign:'center', width: "350px"}}>
@@ -21,7 +21,7 @@ export default function ({marque,prix,score,desc,img,matricule,titre}) {
                     <input type='hidden' name='score' value={score}/>
                     <input type='hidden' name='desc' value={desc}/>
                     <input type='hidden' name='img' value={img}/>
-                    <Button style={{width:'350px'}} onClick={e =>{setinfocar({matricule:matricule,prix:prix,image:img,marque:marque});setvuehome()}} > {titre} </Button>
+                    <Button style={{width:'350px'}} onClick={e =>{setinfocar({matricule:matricule,prix:prix,image:img,marque:marque,id:id});setvuehome()}} > {titre} </Button>
                 </Card>
                     </Col>
   )

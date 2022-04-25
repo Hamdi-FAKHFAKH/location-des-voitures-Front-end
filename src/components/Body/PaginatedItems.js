@@ -16,7 +16,7 @@ export function PaginatedItems({ itemsPerPage }) {
         <Row>
         { currentItems &&
           currentItems.map((l,index) => (    
-              <Cartvoiture key={`${l.matricule} ${index}`} marque={l.marque} prix={l.prix_par_heure} score={3} desc = {l.description} img={l.imageUrl} matricule={l.matricule} titre={'louer'}/>
+              <Cartvoiture key={`${l.matricule} ${index}`} marque={l.marque} prix={l.prix_par_heure} score={3} desc = {l.description} img={l.imageUrl} matricule={l.matricule} titre={'louer'} id={l._id}/>
           ))}
       </Row>
       </Container>

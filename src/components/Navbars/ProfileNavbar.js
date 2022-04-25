@@ -135,47 +135,68 @@ function ProfileNavbar() {
             <NavItem>
                       <NavLink href="/contact">Contact</NavLink>
             </NavItem>
-            {
-              (!getCookie('userId') || getCookie('userId') == 'null' || getCookie('userId') == 'undefined')?  
-               <>
-                    <NavItem>
-                      <NavLink
-                        data-placement="bottom"
-                        href="/connexion"
-                        title="connecter a votre espace client"
-                      >
-                        <i className="fa fa-sign-in" aria-hidden="true"/>
-                        <p className="d-lg-none">Connecter</p>
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink  data-placement="bottom"
-                        href='/inscrit'
-                        title="crée un nouveau compte client ">
-                        <i className="fa fa-user-plus" aria-hidden="true"/>
-                        <p className="d-lg-none" >créer un compte</p>
-                      </NavLink>
-                    </NavItem>
-                </> : <>
-                  <NavItem onClick={ signOut }>
-                      <NavLink  data-placement="bottom"
-                        href='/inscription'
-                        title="désinscription ">
-                        <i className="fa fa-sign-out" aria-hidden="true"></i>
-                        <p className="d-lg-none" >se déconnecter de votre compte</p>
-                      </NavLink>
-                    </NavItem>
-                </>
-            
-            }
-            <NavItem>
-              <NavLink  data-placement="bottom"
-                href='/entreprise'
-                title="envoyer une demande de poster des services ">
-                <i className="fa fa-users" aria-hidden="true"></i>
-                <p className="d-lg-none" > Poster une Demande </p>
-              </NavLink>
-            </NavItem>
+            {!getCookie("userId") || !getCookie("token") ||
+            getCookie("userId") === "null" || getCookie("token") === "null" ||
+            getCookie("userId") === "undefined" || getCookie("token")=== "undefined"
+             ? (
+              <>
+                <NavItem>
+                  <NavLink
+                    data-placement="bottom"
+                    href="/connexion"
+                    title="connecter a votre espace client"
+                  >
+                    <i className="fa fa-sign-in" aria-hidden="true" />
+                    <p className="d-lg-none">Connecter</p>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    data-placement="bottom"
+                    href="/inscrit"
+                    title="crée un nouveau compte client "
+                  >
+                    <i className="fa fa-user-plus" aria-hidden="true" />
+                    <p className="d-lg-none">créer un compte</p>
+                  </NavLink>
+                </NavItem>
+
+                <NavItem>
+                  <NavLink
+                    data-placement="bottom"
+                    href="/entreprise"
+                    title="envoyer une demande de poster des services "
+                  >
+                    <i className="fa fa-users" aria-hidden="true"></i>
+                    <p className="d-lg-none"> créer un compte entreprise </p>
+                  </NavLink>
+                </NavItem>
+              </>
+            ) : (
+              <>
+                <NavItem>
+                  <NavLink
+                    data-placement="bottom"
+                    href="/profiles"
+                    title="envoyer une demande de poster des services "
+                  > 
+                    <i className="fa fa-user-circle" aria-hidden="true"></i>
+                    <p className="d-lg-none"> votre profile </p>
+                </NavLink>
+                </NavItem>
+
+                <NavItem onClick={signOut}>
+                  <NavLink
+                    data-placement="bottom"
+                    href="/inscription"
+                    title="désinscription "
+                  >
+                    <i className="fa fa-sign-out" aria-hidden="true"></i>
+                    <p className="d-lg-none">se déconnecter de votre compte</p>
+                  </NavLink>
+                </NavItem>
+              </>
+            )}
             
           </Nav>
         </Collapse>
