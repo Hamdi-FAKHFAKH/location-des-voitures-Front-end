@@ -51,7 +51,7 @@ export default function Listeofcar({vue,setvue}) {
 
   useEffect(()=> {
     getMesVoitures();
-    console.log(mesVoitures);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[vue])
 
 

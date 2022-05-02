@@ -1,14 +1,11 @@
 import { Carcontext } from 'context/Carcontext';
 import React,{ useContext ,useEffect,useState}  from 'react'
-import { Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Row } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Row } from 'reactstrap';
 import { Icon } from '@iconify/react';
 export default function CarReservation() {
 
   async function reserver(){
     setvuehome();
-    console.log("m: ",infoRes.dateDep +' '+infoRes.tempsDep);
-    console.log("s ",infoRes.dateRet + ' ' + infoRes.tempsRet);
-    console.log("infocar.id ",infocar);
       const requestOptions = {
           method: 'Post',
           headers: { 
@@ -29,11 +26,11 @@ export default function CarReservation() {
       })
       .catch(err => console.error(err));   
   }
-
     const {setvuehome,infocar,infoRes,setinfoRes} = useContext(Carcontext);
     useEffect(()=>
     {
       setinfoRes({...infoRes,prix:infocar.prix * infoRes.nbheure });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]
     )
     //****************************************************************************** */
@@ -74,6 +71,7 @@ export default function CarReservation() {
 
     useEffect(()=>{
       getOwnerDetails()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
   return (
@@ -225,9 +223,18 @@ export default function CarReservation() {
                 <Row>
                 <Col lg='auto'>
                 <div style={{margin:'-17px 0px 0px 20px',font:'30px librebaskerville'}}> <strong>{infocar.marque}</strong></div>
-                <div style={{margin:'15px 20px',font:'17px librebaskerville'}}> Du {infoRes.dateDep} à {infoRes.tempsDep} <br/>
+                <div style={{margin:'15px 20px',font:'17px librebaskerville'}}> Du&ensp;
+                    { (new Date(infoRes.dateDep).getDate()<10?'0'+new Date(infoRes.dateDep).getDate():new Date(infoRes.dateDep).getDate()) +'/'+
+                      (new Date(infoRes.dateDep).getMonth()+1<10?'0'+(new Date(infoRes.dateDep).getMonth()+1):(new Date(infoRes.dateDep).getMonth()+1)) +'/'+
+                      new Date(infoRes.dateDep).getFullYear()
+                    } à {infoRes.tempsDep} <br/>
                 <strong>Prise :{infoRes.depart}</strong></div>
-                <div style={{margin:'0px 0px 10px 20px',font:'17px librebaskerville'}}> Du {infoRes.dateRet} à {infoRes.tempsRet}<br/>
+                <div style={{margin:'0px 0px 10px 20px',font:'17px librebaskerville'}}> Du&ensp;
+                    { 
+                       (new Date(infoRes.dateRet).getDate()<10?'0'+new Date(infoRes.dateRet).getDate():new Date(infoRes.dateRet).getDate())+'/'+
+                      (new Date(infoRes.dateRet).getMonth()+1<10?'0'+(new Date(infoRes.dateRet).getMonth()+1):(new Date(infoRes.dateRet).getMonth()+1)) +'/'+
+                      new Date(infoRes.dateRet).getFullYear() 
+                    } à {infoRes.tempsRet}<br/>
                 <strong>Remise : {infoRes.retour}</strong></div>
                 <img src={infocar.image} alt='not found'style={{ float:'left' ,borderRadius: '10px',margin:'6px 20px 30px 6px',height:'250px',width:'350px'}}/> 
                 <br/><br/>

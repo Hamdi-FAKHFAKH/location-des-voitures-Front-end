@@ -10,7 +10,7 @@ export default function InfoSociété() {
             for(let i in disable){
                 !disable[i]&&setDisablebt(false);
              }
-        }
+        },[disable]
     )
 
     
@@ -57,6 +57,7 @@ export default function InfoSociété() {
 
       useEffect(()=>{
         getOwnerDetails()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       },[])
 
       async function sendUpdateOwner(event){
