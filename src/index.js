@@ -13,7 +13,8 @@ import Service from "components/Body/Service";
 import FormEntrepriser from "components/Body/FormEntrepriser";
 import Contact from "components/Body/Contact";
 import Profile from './components/Body/Profile';
-import ProfileSociété from "components/Body/ProfileSociété";
+import ProfileSociété from "components/Body/profile_société/ProfileSociété";
+
 
 ReactDOM.render(
   <BrowserRouter>

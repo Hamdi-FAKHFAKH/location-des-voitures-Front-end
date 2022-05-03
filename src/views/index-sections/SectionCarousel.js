@@ -42,7 +42,7 @@ function SectionCarousel() {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [animating, setAnimating] = React.useState(false);
   const onExiting = () => {
-    setAnimating(true);
+    setAnimating(false);
   };
   const onExited = () => {
     setAnimating(false);

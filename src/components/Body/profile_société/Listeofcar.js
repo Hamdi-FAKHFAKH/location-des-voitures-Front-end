@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import { Carcontext } from 'context/Carcontext';
+import React, { useState, useEffect ,useContext} from 'react'
 import { Button, Container, Row } from 'reactstrap'
-import Cartvoiture from './Cartvoiture';
+import Cartvoiture from '../Cartvoiture';
 
-export default function Listeofcar({vue,setvue}) {
 
+export default function Listeofcar() {
+  const {setvueprofileSociété,vueprofileSociété} = useContext (Carcontext);
   function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -52,7 +54,7 @@ export default function Listeofcar({vue,setvue}) {
   useEffect(()=> {
     getMesVoitures();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[vue])
+  },[vueprofileSociété])
 
 
   return (
@@ -67,7 +69,7 @@ export default function Listeofcar({vue,setvue}) {
       }
   </Row>
   <br/>
-        <Button onClick={()=>setvue('vuedeformV')} style={{height:'50px',width:'50px'}} color="success"><span style={{fontSize:'20px',fontWeight:'bold'}}>+</span></Button><br/><br/>
+        <Button onClick={()=>setvueprofileSociété('vuedeformV')} style={{height:'50px',width:'50px'}} color="success"><span style={{fontSize:'20px',fontWeight:'bold'}}>+</span></Button><br/><br/>
   </Container></div>
   )
 }

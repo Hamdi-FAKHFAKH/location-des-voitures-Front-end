@@ -33,7 +33,8 @@ state={
         matricule:'',
         image:'',
         prix:'',
-        marque:''
+        marque:'',
+        desc : ''
     },
     vuehome:true,
     infoRes:{
@@ -49,7 +50,8 @@ state={
       nbheure:1,
       prix : ''
     },
-    voitures : ''
+    voitures : '',
+    vueprofileSociété:'vuelisteV'
 };
 setinfocar = (val)=>{
     this.setState({infocar:val})
@@ -63,9 +65,12 @@ setinfoRes = (val)=>{
 setVoitures = (val)=>{
   this.setState({voitures:val})
 }
+setvueprofileSociété = (val)=>{
+  this.setState({vueprofileSociété:val})
+}
   render() {
     return (
-      <Carcontext.Provider value={{ ...this.state,setinfocar : this.setinfocar,setvuehome:this.setvuehome,setinfoRes:this.setinfoRes,setVoitures:this.setVoitures}}>
+      <Carcontext.Provider value={{ ...this.state,setinfocar : this.setinfocar,setvuehome:this.setvuehome,setinfoRes:this.setinfoRes,setVoitures:this.setVoitures,setvueprofileSociété:this.setvueprofileSociété}}>
           {this.props.children}
       </Carcontext.Provider>
       
