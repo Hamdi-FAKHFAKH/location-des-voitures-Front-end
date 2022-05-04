@@ -3,9 +3,10 @@ import React,{ useContext ,useEffect,useState}  from 'react'
 import { Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Row } from 'reactstrap';
 import { Icon } from '@iconify/react';
 export default function CarReservation() {
+  const [ auth, setAuth ] = useState("");
+  const [ erreur, setErreur ] = useState({ isError: false, message:"" })
 
   async function reserver(){
-    setvuehome();
     console.log("m: ",infoRes.dateDep +' '+infoRes.tempsDep);
     console.log("s ",infoRes.dateRet + ' ' + infoRes.tempsRet);
     console.log("infocar.id ",infocar);
@@ -16,23 +17,34 @@ export default function CarReservation() {
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + getCookie("token")
           },
-            body: JSON.stringify({ dateDep: infoRes.dateDep +' '+infoRes.tempsDep, dateRet: infoRes.dateRet + ' ' + infoRes.tempsRet, idVoiture: infocar.id })
+            body: JSON.stringify({ dateDep: infoRes.dateDep +' '+infoRes.tempsDep, dateRet: infoRes.dateRet + ' ' + infoRes.tempsRet, idVoiture: infocar.id, motDePasse: auth })
 
       };
       console.log("reserver "+infoRes.dateDep + ' '+ infoRes.tempsDep + " " + infoRes.dateRet + ' ' + infoRes.tempsRet );
-      alert("reserver "+infoRes.dateDep + " " +infoRes.dateRet);
-      fetch('http://localhost:3000/api/reservation/', requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-          // setVoitures(data) 
+      const response = await fetch('http://localhost:3000/api/reservation/', requestOptions).catch(() => {
+        setErreur({ isError: true, message:"erreur inconnue 1" });
       })
-      .catch(err => console.error(err));   
+      const data = await response.json().catch(() => {
+        setErreur({ isError: true, message:"erreur inconnue 2" });
+      })
+      console.log("data ",data);
+      if(data.error && data.code === 1){
+        setErreur({ isError: true, message:"mot de passe incorrecte" });
+        alert("mot de passe incorrecte ");
+      } else {
+        console.log(data);
+        alert("reservation réussi le "+infoRes.dateDep + " " +infoRes.dateRet);
+        setvuehome();
+
+      }
+
+          // setVoitures(data) 
   }
 
     const {setvuehome,infocar,infoRes,setinfoRes} = useContext(Carcontext);
     useEffect(()=>
     {
+      setErreur(false);
       setinfoRes({...infoRes,prix:infocar.prix * infoRes.nbheure });
     },[]
     )
@@ -177,7 +189,7 @@ export default function CarReservation() {
                       <Col>
                         <Label> Mot de Passe :</Label>                        
                         <InputGroup>
-                            <Input placeholder="Mot de Passe " type="password" />
+                            <Input placeholder="Mot de Passe " type="password" onChange={ e => setAuth(e.target.value) } />
                             <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 <i aria-hidden={true} className="fa fa-key" />
@@ -191,6 +203,7 @@ export default function CarReservation() {
                     <Col>
                     <Label> Options supplémentaires(Optionnel):</Label>  
                     <Input type='textarea' rows='4' placeholder='saisie des option supplémentaire'/>
+                    {erreur? <span style={{ color: "red" }}> { erreur.message } </span> : null}
                     </Col>  
                     </Row>
                     <br/>
