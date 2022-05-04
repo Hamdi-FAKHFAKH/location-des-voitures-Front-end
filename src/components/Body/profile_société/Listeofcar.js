@@ -6,6 +6,8 @@ import Cartvoiture from '../Cartvoiture';
 
 export default function Listeofcar() {
   const {setvueprofileSociété,vueprofileSociété} = useContext (Carcontext);
+  const [ mesVoitures, setMesVoitures ] = useState([])
+/**************************************************************************************************** */
   function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -21,8 +23,7 @@ export default function Listeofcar() {
     }
     return "";
   }
-
-  const [ mesVoitures, setMesVoitures ] = useState([])
+/******************************************************************************************************* */
     const getMesVoitures = () => {
       console.log("getmesvoitures");
       const requestOptions = {
@@ -43,14 +44,16 @@ export default function Listeofcar() {
       })
       .catch(err => console.error(err));
     }
+/***************************************************************************************** */
   document.documentElement.classList.remove("nav-open");
+  /**************************use effect ******************************* */
   React.useEffect(() => {
     document.body.classList.add("index");
     return function cleanup() {
       document.body.classList.remove("index");
     };
   });
-
+/***************************************use effect pour get des voitures ************************* */
   useEffect(()=> {
     getMesVoitures();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,7 +62,7 @@ export default function Listeofcar() {
 
   return (
     <div>
-    <Container style={{marginTop:'40px',margin:'auto',maxWidth:'900px' , marginLeft:'60px'}}>
+    <Container style={{marginTop:'40px',margin:'auto',maxWidth:'900px' }}>
          <h2 style={{fontWeight:'bold',font:'50px serif'}}> Gérer les voitures </h2><br/>
     <Row>
     {

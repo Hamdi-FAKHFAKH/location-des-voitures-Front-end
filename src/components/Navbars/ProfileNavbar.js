@@ -172,12 +172,12 @@ function ProfileNavbar() {
                   </NavLink>
                 </NavItem>
               </>
-            ) : (
+            ) : (getCookie('type')=='client'?(
               <>
                 <NavItem>
                   <NavLink
                     data-placement="bottom"
-                    href="/profiles"
+                    href="/profilec"
                     title="envoyer une demande de poster des services "
                   > 
                     <i className="fa fa-user-circle" aria-hidden="true"></i>
@@ -196,7 +196,29 @@ function ProfileNavbar() {
                   </NavLink>
                 </NavItem>
               </>
-            )}
+            ):(  <>
+              <NavItem>
+                <NavLink
+                  data-placement="bottom"
+                  href="/profiles"
+                  title="envoyer une demande de poster des services "
+                > 
+                  <i className="fa fa-user-circle" aria-hidden="true"></i>
+                  <p className="d-lg-none"> votre profile </p>
+              </NavLink>
+              </NavItem>
+
+              <NavItem onClick={signOut}>
+                <NavLink
+                  data-placement="bottom"
+                  href="/inscription"
+                  title="désinscription "
+                >
+                  <i className="fa fa-sign-out" aria-hidden="true"></i>
+                  <p className="d-lg-none">se déconnecter de votre compte</p>
+                </NavLink>
+              </NavItem>
+            </>))}
             
           </Nav>
         </Collapse>

@@ -123,7 +123,7 @@ function Connexion() {
                   <label>mot de passe</label>
                   <Input placeholder="Password" type="password" onChange={e => setClient( {...client ,motDePasse: e.target.value} )} />
                   <Button block className="btn-round"  color="dark"> 
-                  S'inscrire
+                  connexion
                   </Button>
                 </Form>
                 { isWrongConfidentials && <span style={{ marginLeft:'50px',marginTop:'15px',color:'red'}}>faux pseudo ou mot de passe</span>}
