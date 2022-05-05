@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import { Carcontext } from 'context/Carcontext';
+import React, { useState ,useContext} from 'react'
 import { Button, Col, Container, Form, FormGroup, FormText, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Row } from 'reactstrap'
 
-export default function NewCar({vue,setvue}) {
-
+export default function NewCar() {
+  const {setvueprofileSociété,vueprofileSociété} = useContext (Carcontext);
   const [newVoiture, setNewVoiture] = useState({});
-
+  const [ wrongConfidentials, setWrongConfidentials ] = useState({isWrong: false, message: ''});
   function getInput(e){
     setNewVoiture({ ...newVoiture, [e.target.name]: e.target.value })
   }
@@ -85,7 +86,7 @@ export default function NewCar({vue,setvue}) {
               <Col>
               <Label style={{fontSize:'15px',fontWeight:'bold' ,marginTop:'18px'}}> Description <span style={{color:'red'}}>*</span></Label>
                     <InputGroup>
-                        <Input placeholder="Description de la voiture" type="textarea"  rows='5' minLength={80} maxLength={120} name="description" onChange={ (e) => getInput(e) }/>
+                        <Input placeholder="Description de la voiture" type="textarea"  rows='5' minLength={80} maxLength={85} name="description" onChange={ (e) => getInput(e) }/>
                     </InputGroup>
                     <Label style={{fontSize:'15px',fontWeight:'bold' ,marginTop:'18px'}}> Choisit l'image de la voiture <span style={{color:'red'}}>*</span></Label>
                     <FormGroup>
@@ -107,9 +108,9 @@ export default function NewCar({vue,setvue}) {
                     <Button block className="btn-round" color="dark" type='submit' onClick={(e)=>{
                                                                                 e.preventDefault();
                                                                                 ajoutervoiture(newVoiture);
-                                                                                setvue('vuelisteV')}
+                                                                                setvueprofileSociété('vuelisteV')}
                                                                                 }>Envoyer</Button></Col>
-                    <Col className="ml-auto mr-auto" lg='4'><Button block className="btn-round" color="dark" type='submit' onClick={(e)=>setvue('vuelisteV')}>Annuler</Button></Col>
+                    <Col className="ml-auto mr-auto" lg='4'><Button block className="btn-round" color="dark" type='submit' onClick={(e)=>setvueprofileSociété('vuelisteV')}>Annuler</Button></Col>
                      </Row>
                     </Form>
 

@@ -12,7 +12,7 @@ import { Carcontext } from 'context/Carcontext';
 //itemsPerPage nombre de itmes afficher dans chaque page
  
 export function PaginatedItems({ itemsPerPage }) {
-  const {setinfoRes,infoRes,infocar} = useContext(Carcontext);
+  const {voitures} = useContext(Carcontext);
   function Items({ currentItems }) {
     return (
       <>
@@ -34,38 +34,6 @@ export function PaginatedItems({ itemsPerPage }) {
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
 
-  const [ voitures, setVoitures ] = useState(null);
-
-  const getVoitures = () => {
-    console.log("lenaaaa");
-    const requestOptions = {
-        method: 'Get',
-        headers: { 
-          'Content-Type': 'application/json', 
-          'Accept': 'application/json'
-        },
-    };
-    console.log("recherche:  ",infoRes.dateDep +' ' +infoRes.tempsDep +'/'+infoRes.dateRet + ' ' + infoRes.tempsRet);
-    fetch('http://localhost:3000/api/voiture/'+infoRes.dateDep +" " + infoRes.tempsDep +'/'+infoRes.dateRet+" " + infoRes.tempsRet , requestOptions)
-    .then(response => response.json())
-    .then(data => {
-        console.log('http://localhost:3000/api/voiture/'+infoRes.dateDep +" " + infoRes.tempsDep +'/'+infoRes.dateRet+" " + infoRes.tempsRet);
-        setVoitures(data) 
-    })
-    .catch(err => {console.error(err)})
-    }
-  document.documentElement.classList.remove("nav-open");
-  React.useEffect(() => {
-    document.body.classList.add("index");
-    return function cleanup() {
-      document.body.classList.remove("index");
-    };
-  });
-
-  useEffect(() => {
-    getVoitures();
-  }, [infoRes]);
-
   useEffect(() => {
     // Fetch items from another resources.
     const endOffset = itemOffset + itemsPerPage;
@@ -77,9 +45,6 @@ export function PaginatedItems({ itemsPerPage }) {
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % voitures.length;
-    console.log(
-     ` User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
     setItemOffset(newOffset);
   };
 

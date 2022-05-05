@@ -3,28 +3,42 @@ import React,{useContext} from 'react'
 import ReactDatetimeClass from 'react-datetime'
 
 import { Button, Col, Container, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap'
+import SectionCarousel from 'views/index-sections/SectionCarousel';
 import { PaginatedItems } from './PaginatedItems'
 
 export default function HomeCar() {
   const [checked, setChecked] = React.useState(false);
-  const {setinfoRes,infoRes,infocar} = useContext(Carcontext);
+    const {setinfoRes,infoRes,setVoitures,vuehome} = useContext(Carcontext);
 
-  function getCurrentDate(separator='-',houre=0){
-    let newDate = new Date()
-    let date = newDate.getDate();
-    let month = newDate.getMonth() + 1;
-    let year = newDate.getFullYear();
-    var hours = newDate.getHours()+houre;
-    var minutes = newDate.getMinutes();
-    if(hours >23)
-    {
-      date = date +1 ;
-      hours = hours - 24;
+  const getVoitures = () => {
+    console.log("lenaaaa");
+    const requestOptions = {
+        method: 'Get',
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Accept': 'application/json'
+        },
+    };
+    console.log("recherche:  ",infoRes.dateDep +' ' +infoRes.tempsDep +'/'+infoRes.dateRet + ' ' + infoRes.tempsRet);
+    fetch('http://localhost:3000/api/voiture/'+infoRes.dateDep +" " + infoRes.tempsDep +'/'+infoRes.dateRet+" " + infoRes.tempsRet , requestOptions)
+    .then(response => response.json())
+    .then(data => {
+        console.log('http://localhost:3000/api/voiture/'+infoRes.dateDep +" " + infoRes.tempsDep +'/'+infoRes.dateRet+" " + infoRes.tempsRet);
+        setVoitures(data) 
+    })
+    .catch(err => {console.error(err)})
     }
-    var strTime = hours + ':' + minutes 
-    return `${date}${separator}${month<10?`0${month}`:`${month}`}${separator}${year} ${strTime}`
-    }
-  const dateRes = e =>{
+  document.documentElement.classList.remove("nav-open");
+  React.useEffect(() => {
+    document.body.classList.add("index");
+    return function cleanup() {
+      document.body.classList.remove("index");
+    };
+  });
+  //***************************************************use effect ********************************************** */
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  React.useEffect(()=>{getVoitures()},[infoRes,vuehome])
+  const SetNbHeure = e =>{
     var hstot = parseInt(infoRes.hdep) + parseInt(e.target.value); 
     var date = infoRes.dateDep;
     if (hstot > 23 ){ 
@@ -36,9 +50,10 @@ export default function HomeCar() {
       console.log(infoRes.dateRet)
     }
     setinfoRes({...infoRes,nbheure:e.target.value,tempsRet:`${hstot}:${infoRes.mindep}`,dateRet:date})
+ 
   }
     
-  const setdateRes = (e,h) =>{
+  const setDateDep = (e,h) =>{
     var day = e.format('DD');
     var houre = e.format('HH');
     const min = e.format('mm');
@@ -49,7 +64,8 @@ export default function HomeCar() {
     }
     let month = parseInt(e.format('MM'));
     let year = e.format('YYYY');
-    setinfoRes({...infoRes,dateDep:e.format("MM-DD-YYYY"),tempsDep:e.format("HH:mm"),hdep:e.format("HH"),mindep:e.format("mm"),dateRet:`${month<10?`0${month}`:`${month}`}-${day}-${year}`,tempsRet:`${houre}:${min}`})
+    setinfoRes({...infoRes,dateDep:e.format("MM-DD-YYYY"),tempsDep:e.format("HH:mm"),hdep:e.format("HH"),mindep:e.format("mm"),dateRet:`${month<10?`0${month}`:`${month}`}-${day}-${year}`,tempsRet:`${houre}:${min}`});
+    
   }
   
   
@@ -64,7 +80,7 @@ export default function HomeCar() {
     <Row>
     <Col>
     <label htmlFor={'select'}> Agence de prise en charge </label>
-    <Input type={'select'} id='select' defaultValue={'Aéroport Tunis Carthage'} style={{width:'350px',marginBottom:'5px'}} onChange={e=>{setinfoRes({...infoRes,depart:e.target.value,retour:e.target.value});console.log(infoRes)}}>
+    <Input type={'select'} id='select' defaultValue={'Aéroport Tunis Carthage'} style={{width:'350px',marginBottom:'5px'}} onChange={e=>{setinfoRes({...infoRes,depart:e.target.value,retour:e.target.value})}}>
     <optgroup label="Aéroport">
 									
                   <option value="Aéroport Djerba">Aéroport Djerba</option>
@@ -143,14 +159,14 @@ export default function HomeCar() {
     <FormGroup style={{width:'220px'}}>
                     <InputGroup className="date" id="datetimepicker">
                       <ReactDatetimeClass
-                       initialValue={getCurrentDate('-',1)}
+                       initialValue={ `${new Date(infoRes.dateDep).getDate()<10?'0'+new Date(infoRes.dateDep).getDate():new Date(infoRes.dateDep).getDate()}-${(new Date(infoRes.dateDep).getMonth()+1<10?'0'+(new Date(infoRes.dateDep).getMonth()+1):(new Date(infoRes.dateDep).getMonth()+1))}-${new Date(infoRes.dateDep).getFullYear()} ${infoRes.tempsDep}`}
                         inputProps={{
                           placeholder: "Date de retrait",
                         }}
 
                         dateFormat={'DD-MM-YYYY'}
                         timeFormat={'HH:mm'}
-                        onChange={e=>{setdateRes(e,infoRes.nbheure)}}
+                        onChange={e=>{setDateDep(e,infoRes.nbheure)}}
                        
                       />
                       <InputGroupAddon addonType="append">
@@ -164,32 +180,10 @@ export default function HomeCar() {
     </FormGroup>
     </Col>
     <Col>
-    {/* <label> Date de retour </label>
-    <FormGroup style={{width:'220px'}}>
-                    <InputGroup className="date" id="datetimepicker">
-                      <ReactDatetimeClass
-                        initialValue={getCurrentDate('/',2)}
-                        inputProps={{
-                          placeholder: "Date de retour",
-                        }}
-                        dateFormat ={false}
-                        timeFormat ={`${infoRes.dateDep} HH:mm`}
-                        onChange={e=>{setinfoRes({...infoRes,dateRet:e.format("DD/MM/YYYY"),tempsRet:e.format("HH:mm")});console.log(infoRes)}}
-                        
-                      />
-                      <InputGroupAddon addonType="append">
-                        <InputGroupText>
-                          <span className="glyphicon glyphicon-calendar">
-                            <i aria-hidden={true} className="fa fa-calendar" />
-                          </span>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                    </InputGroup>
-    </FormGroup> */}
     <label> Nombre de Heure </label>
     <FormGroup style={{width:'220px'}}>
     <InputGroup className="date" id="datetimepicker">
-      <Input type='number' placeholder='Nombre de heure' min={1} defaultValue={infoRes.nbheure} onChange={e=>dateRes(e)} />
+      <Input type='number' placeholder='Nombre de heure' min={1} defaultValue={infoRes.nbheure} onChange={e=>SetNbHeure(e)} />
       <InputGroupAddon addonType="append">
                         <InputGroupText>
                           <span className="glyphicon glyphicon-calendar">
@@ -201,14 +195,21 @@ export default function HomeCar() {
     </FormGroup>
     </Col>
     <Col>
-    <Button type='submit'  color="success"  style={{marginTop:'30px'}}> Recherche </Button>
+    <Button type='submit'  color="success"  style={{marginTop:'30px'}} onClick={getVoitures}> Recherche </Button>
     </Col>
     </Row>
     </div>
     </div>
     </Row>
     </Container>
-    <PaginatedItems itemsPerPage={6}/><br/><br/>
+    
+    <PaginatedItems itemsPerPage={6}/><br/><br/><br/><br/>
+    <p style={{textAlign:'center', fontSize:'1.4rem',fontWeight:'700', color:'black'}}>PROMOTION</p>
+    <p style={{textAlign:'center', fontSize:'1.3em',fontWeight:'600', color:'rgb(177, 149, 64)' , marginBottom:'10px'}}>Promotion location de voiture en Tunisie</p>
+    <div style={{borderTop:'2px solid ', width:'150px' , margin:'auto' , marginBottom:'-20px'}}> </div>
+    <h2 style={{textAlign:'center',  font:'15px cursive'}}> Avec TUNISIA RENT CAR, effectuez une location voiture tunisie pas cher.Les meilleures promos de location auto tunisie.<br/>
+      Réservez votre voiture à l'aéroport en 3 clics.</h2><br/>
+    <SectionCarousel/>
     <Container>
     <h1 style={{paddingBottom:'15px' , marginBottom:'40px', font:'30px cursive'}}>Avis Clients</h1>
       <Row>

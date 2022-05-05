@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React from "react";
 // nodejs library that concatenates strings
 import classnames from "classnames";
@@ -12,7 +13,6 @@ import {
   Container,
 } from "reactstrap";
 function ProfileNavbar() {
-  const [navbarColor, setNavbarColor] = React.useState("black");
   const [navbarCollapse, setNavbarCollapse] = React.useState(false);
 
   const toggleNavbarCollapse = () => {
@@ -52,7 +52,7 @@ function ProfileNavbar() {
   }
 
   return (
-    <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
+    <Navbar className={classnames("fixed-top", 'black')} expand="lg">
       <Container>
         <div className="navbar-translate">
           <NavbarBrand
