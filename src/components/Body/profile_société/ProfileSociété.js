@@ -23,8 +23,7 @@ export default function ProfileSociété() {
       reader.readAsDataURL(file)
       reader.onload = () => {  
           setimgUpload(reader.result);
-          /** ******* console ********** */
-          console.log(reader.result);     
+          /** ******* console ********** */    
       };
       reader.onerror = function (error) {
         console.log('Error: ', error);
