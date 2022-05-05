@@ -6,6 +6,21 @@ import { Carcontext } from 'context/Carcontext';
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function ({marque,prix,score,desc,img,matricule,titre,id}) {
   const{setinfocar,setvuehome,setvueprofileSociété} = useContext(Carcontext);
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  } 
   return (   
    <Col style={{textAlign:'center', width: "350px"}}>
                 <Card style={{backgroundColor:'ButtonFace', width: "350px" , height:'430px'}}>
@@ -22,7 +37,7 @@ export default function ({marque,prix,score,desc,img,matricule,titre,id}) {
                     <input type='hidden' name='score' value={score}/>
                     <input type='hidden' name='desc' value={desc}/>
                     <input type='hidden' name='img' value={img}/>
-                    <Button style={{width:'350px'}} onClick={e =>{setinfocar({matricule:matricule,prix:prix,image:img,marque:marque,id:id,desc:desc});setvuehome();titre == 'voir plus' &&setvueprofileSociété('vueupdateV')}} > {titre} </Button>
+                    <Button style={{width:'350px'}} onClick={e =>{setinfocar({matricule:matricule,prix:prix,image:img,marque:marque,id:id,desc:desc});setvuehome();getCookie('token') ==''&& (window.location.href = "/connexion") ;titre == 'voir plus' &&setvueprofileSociété('vueupdateV')}} > {titre} </Button>
                 </Card>
                     </Col>
   )

@@ -12,36 +12,35 @@ import {
   Container,
 } from "reactstrap";
 function IndexNavbar() {
-  const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
-  const [navbarCollapse, setNavbarCollapse] = React.useState(false);
+      const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
+      const [navbarCollapse, setNavbarCollapse] = React.useState(false);
 
-  const toggleNavbarCollapse = () => {
-    setNavbarCollapse(!navbarCollapse);
-    document.documentElement.classList.toggle("nav-open");
-  };
+      const toggleNavbarCollapse = () => {
+        setNavbarCollapse(!navbarCollapse);
+        document.documentElement.classList.toggle("nav-open");
+      };
 
-  React.useEffect(() => {
-    const updateNavbarColor = () => {
-      if (
-        document.documentElement.scrollTop > 299 ||
-        document.body.scrollTop > 299
-      ) {
-        setNavbarColor("");
-      } else if (
-        document.documentElement.scrollTop < 300 ||
-        document.body.scrollTop < 300
-      ) {
-        setNavbarColor("navbar-transparent");
-      }
-    };
+React.useEffect(() => {
+      const updateNavbarColor = () => {
+        if (
+          document.documentElement.scrollTop > 299 ||
+          document.body.scrollTop > 299
+        ) {
+          setNavbarColor("");
+        } else if (
+          document.documentElement.scrollTop < 300 ||
+          document.body.scrollTop < 300
+        ) {
+          setNavbarColor("navbar-transparent");
+        }
+      };
 
-    window.addEventListener("scroll", updateNavbarColor);
+        window.addEventListener("scroll", updateNavbarColor);
 
-    return function cleanup() {
-      window.removeEventListener("scroll", updateNavbarColor);
-    };
-  });
-
+        return function cleanup() {
+       window.removeEventListener("scroll", updateNavbarColor);
+      };
+});
   function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -193,7 +192,7 @@ function IndexNavbar() {
                   </NavLink>
                 </NavItem>
               </>
-            ) : (
+            ) : (getCookie('type')=='owner'?(
               <>
                 <NavItem>
                   <NavLink
@@ -209,7 +208,7 @@ function IndexNavbar() {
                 <NavItem onClick={signOut}>
                   <NavLink
                     data-placement="bottom"
-                    href="/inscription"
+                    href="/index"
                     title="désinscription "
                   >
                     <i className="fa fa-sign-out" aria-hidden="true"></i>
@@ -217,7 +216,29 @@ function IndexNavbar() {
                   </NavLink>
                 </NavItem>
               </>
-            )}
+            ):(   <>
+              <NavItem>
+                <NavLink
+                  data-placement="bottom"
+                  href="/profilec"
+                  title="envoyer une demande de poster des services "
+                > 
+                  <i className="fa fa-user-circle" aria-hidden="true"></i>
+                  <p className="d-lg-none"> votre profile </p>
+              </NavLink>
+              </NavItem>
+
+              <NavItem onClick={signOut}>
+                <NavLink
+                  data-placement="bottom"
+                  href="/index"
+                  title="désinscription "
+                >
+                  <i className="fa fa-sign-out" aria-hidden="true"></i>
+                  <p className="d-lg-none">se déconnecter de votre compte</p>
+                </NavLink>
+              </NavItem>
+            </>))}
           </Nav>
         </Collapse>
       </Container>

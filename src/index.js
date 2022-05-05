@@ -12,11 +12,14 @@ import Connexion from "components/Body/Connexion";
 import Service from "components/Body/Service";
 import FormEntrepriser from "components/Body/FormEntrepriser";
 import Contact from "components/Body/Contact";
-import Profile from './components/Body/Profile';
+
 import ProfileSociété from "components/Body/profile_société/ProfileSociété";
+import Profileclient from "components/Body/profile_client/ProfileClient";
+import CarcontextProvider from "context/Carcontext";
 
 
 ReactDOM.render(
+  <CarcontextProvider>
   <BrowserRouter>
     <Switch>
       <Route path="/index" render={(props) => <Index {...props} />} />
@@ -25,11 +28,11 @@ ReactDOM.render(
       <Route path="/service" render={(props) => <Service {...props} />}/>
       <Route path="/entreprise" render={(props) => <FormEntrepriser {...props} />}/>
       <Route path="/profiles" render={(props) => <ProfileSociété {...props} />}/>
+      <Route path="/profilec" render={(props) => <Profileclient {...props} />}/>
       <Route path="/contact" render={(props) => <Contact {...props} />}/>
-      <Route path="/profile" render={(props) => <Profile {...props} />}/>
       <Redirect to="/index" />
-
     </Switch>
-  </BrowserRouter>,
+  </BrowserRouter>
+  </CarcontextProvider>,
   document.getElementById("root")
 );

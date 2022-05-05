@@ -62,7 +62,7 @@ export default function CarReservation() {
       }
       return "";
     } 
-    const [ ownerDetails, setOwnerDetails ] = useState([]);
+    const [ ownerDetails, setOwnerDetails ] = useState([]); 
     const getOwnerDetails = () => {
       const requestOptions = {
           method: 'Get',
@@ -90,30 +90,155 @@ export default function CarReservation() {
   return (
     
     <>
-    
     <br/><br/>
-    {ownerDetails&& 
+    
     <Container>
+    
       <Row>
         <Col style={{width:'900px'}}>
           <Card style={{backgroundColor:'rgba(255,255,255,0.2)',width:'670px'}}>
             <CardHeader style={{backgroundColor:'#333333',color:'#ffff',padding: '16px',fontWeight:'bold'}}>Information Client</CardHeader> 
             <CardBody>
               
-                <br/>
-                <Form className="register-form" > 
+              <br/>
+                {(ownerDetails)?(
+                    <Form className="register-form" > 
+                        <Row>
+                          <Col>
+                            <Label> Prénom : </Label>
+                            <InputGroup>
+                                <Input placeholder="saisie votre Prénom" type="text" defaultValue={ ownerDetails.prenom }disabled/>
+                                    <InputGroupText><i aria-hidden={true} className="fa fa-group" /></InputGroupText>
+                            </InputGroup>
+                          </Col>
+                          <Col>
+                            <Label> Nom :</Label>
+                            <InputGroup>
+                              <Input placeholder="saisie votre Nom" type="text"  defaultValue={ ownerDetails.nom }disabled/>
+                              <InputGroupAddon addonType="append">
+                              <InputGroupText>
+                                  <i aria-hidden={true} className="fa fa-group" />
+                              </InputGroupText>
+                              </InputGroupAddon>
+                            </InputGroup>
+                          </Col>
+                        </Row>
+                        <br/>
+                        <Row>
+                          <Col>
+                            <Label> Email :</Label>
+                            <InputGroup>
+                                <Input placeholder="Email" type="email"  defaultValue={ ownerDetails.Email }disabled/>
+                                <InputGroupAddon addonType="append">
+                                <InputGroupText>
+                                    <i aria-hidden={true} className="fa fa-envelope-o" />
+                                </InputGroupText>
+                                </InputGroupAddon>
+                            </InputGroup>
+                          </Col>
+                          <Col>
+                            <Label> Telephone :</Label>
+                            <InputGroup>
+                                <Input placeholder="Téléphone" type="text" defaultValue={ ownerDetails.telephone }disabled />
+                                <InputGroupAddon addonType="append">
+                                <InputGroupText>
+                                    <i aria-hidden={true} className="fa fa-phone" />
+                                </InputGroupText>
+                                </InputGroupAddon>
+                            </InputGroup>
+                          </Col>
+                        </Row>
+                        <br/>
+                        <Row>
+                          <Col>
+                            <Label> CIN :</Label>
+                            <InputGroup>
+                                <Input placeholder="N° CIN" type="text" defaultValue={'11113118'} disabled/>
+                                <InputGroupAddon addonType="append">
+                                <InputGroupText>
+                                    <i aria-hidden={true} className="fa fa-id-card-o" />
+                                </InputGroupText>
+                                </InputGroupAddon>
+                            </InputGroup>
+                          </Col>
+                          <Col>
+                            <Label> Date de Naissance :</Label>
+                            <InputGroup>
+                                <Input placeholder="Date de Naissance " type="text" onFocus={(e)=>e.target.type = 'date'} onBlur={(e)=>e.target.type = 'text'} disabled />
+                                <InputGroupAddon addonType="append">
+                                <InputGroupText>
+                                    <i aria-hidden={true} className="fa fa-calendar" />
+                                </InputGroupText>
+                                </InputGroupAddon>
+                            </InputGroup>
+                          </Col> 
+                        </Row>
+                        <br/>
+                        <Row>
+                          <Col>
+                            <Label> Pseudo :</Label>        
+                            <InputGroup>
+                              <Input placeholder="Pseudo" type="text"   defaultValue={ ownerDetails.pseudo } disabled/>
+                              <InputGroupAddon addonType="append">
+                              <InputGroupText>
+                                  <i aria-hidden={true} className="fa fa-user-circle" />
+                              </InputGroupText>
+                              </InputGroupAddon>
+                            </InputGroup>
+                          </Col> 
+                          <Col>
+                            <Label> Mot de Passe :</Label>                        
+                            <InputGroup>
+                                <Input placeholder="Mot de Passe " type="password" />
+                                <InputGroupAddon addonType="append">
+                                <InputGroupText>
+                                    <i aria-hidden={true} className="fa fa-key" />
+                                </InputGroupText>
+                                </InputGroupAddon>
+                            </InputGroup>
+                          </Col>
+                        </Row>
+                        
+                        <br/>
+                        <Row>
+                        <Col>
+                        <Label> Options supplémentaires(Optionnel):</Label>  
+                        <Input type='textarea' rows='4' placeholder='saisie des option supplémentaire'/>
+                        </Col>  
+                        </Row>
+                        <br/>
+                        <Row>
+                        <Label> Options supplémentaires(Optionnel):</Label>
+                        <Col style={{font:'20px librebaskerville'}}>
+                        <strong><Icon icon="icon-park-outline:gps" width="30" height="30"/> GPS </strong> <input type={'checkbox'}/>&ensp;&ensp;
+                        <strong><Icon icon="mdi:car-child-seat" width="30" height="30" /> Siège enfant </strong> <input type={'checkbox'}/>&ensp;&ensp;
+                        <strong><Icon icon="icon-park-outline:baby-car-seat" width="30" height="30" /> Siège bébé </strong> <input type={'checkbox'}/>&ensp;&ensp;
+                        <strong><Icon icon="icon-park-outline:booster-car-seat" width="30" height="30" /> Rehausseur </strong> <input type={'checkbox'}/>
+                        </Col>  
+                        </Row>
+                        <br/>
+                        <Row>
+                          <Col>            
+                          <Button block className="btn-round" color="success" type='submit' onClick={ reserver }>RESERVER</Button>                      </Col>
+                          <Col>            
+                            <Button block className="btn-round" color="secondary" type='submit' onClick={e=>setvuehome()}>ANNULER</Button>
+                          </Col>                
+                        </Row> 
+                    </Form>
+              ):(
+                    <Form className="register-form" > 
                     <Row>
                       <Col>
                         <Label> Prénom : </Label>
                         <InputGroup>
-                            <Input placeholder="saisie votre Prénom" type="text" defaultValue={ ownerDetails.prenom }disabled/>
+                            <Input placeholder="saisie votre Prénom" type="text" disabled/>
                                 <InputGroupText><i aria-hidden={true} className="fa fa-group" /></InputGroupText>
                         </InputGroup>
                       </Col>
                       <Col>
                         <Label> Nom :</Label>
                         <InputGroup>
-                          <Input placeholder="saisie votre Nom" type="text"  defaultValue={ ownerDetails.nom }disabled/>
+                          <Input placeholder="saisie votre Nom" type="text"  disabled/>
                           <InputGroupAddon addonType="append">
                           <InputGroupText>
                               <i aria-hidden={true} className="fa fa-group" />
@@ -127,7 +252,7 @@ export default function CarReservation() {
                       <Col>
                         <Label> Email :</Label>
                         <InputGroup>
-                            <Input placeholder="Email" type="email"  defaultValue={ ownerDetails.Email }disabled/>
+                            <Input placeholder="Email" type="email"  disabled/>
                             <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 <i aria-hidden={true} className="fa fa-envelope-o" />
@@ -138,7 +263,7 @@ export default function CarReservation() {
                       <Col>
                         <Label> Telephone :</Label>
                         <InputGroup>
-                            <Input placeholder="Téléphone" type="text" defaultValue={ ownerDetails.telephone }disabled />
+                            <Input placeholder="Téléphone" type="text" disabled />
                             <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 <i aria-hidden={true} className="fa fa-phone" />
@@ -152,7 +277,7 @@ export default function CarReservation() {
                       <Col>
                         <Label> CIN :</Label>
                         <InputGroup>
-                            <Input placeholder="N° CIN" type="text" defaultValue={'11113118'} disabled/>
+                            <Input placeholder="N° CIN" type="text"  disabled/>
                             <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 <i aria-hidden={true} className="fa fa-id-card-o" />
@@ -177,7 +302,7 @@ export default function CarReservation() {
                       <Col>
                         <Label> Pseudo :</Label>        
                         <InputGroup>
-                          <Input placeholder="Pseudo" type="text"   defaultValue={ ownerDetails.pseudo } disabled/>
+                          <Input placeholder="Pseudo" type="text"    disabled/>
                           <InputGroupAddon addonType="append">
                           <InputGroupText>
                               <i aria-hidden={true} className="fa fa-user-circle" />
@@ -197,6 +322,7 @@ export default function CarReservation() {
                         </InputGroup>
                       </Col>
                     </Row>
+                    
                     <br/>
                     <Row>
                     <Col>
@@ -224,9 +350,11 @@ export default function CarReservation() {
                       </Col>                
                     </Row> 
                 </Form>
-              
+              )}
+
             </CardBody>
           </Card>
+        
         </Col>
         <Col>
 
@@ -278,7 +406,7 @@ export default function CarReservation() {
         </Col>
       </Row>
     </Container>
-    }
+   
     </>
   )
 }
