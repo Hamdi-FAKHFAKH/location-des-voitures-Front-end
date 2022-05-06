@@ -15,10 +15,15 @@ export default function CarReservation() {
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + getCookie("token")
           },
-            body: JSON.stringify({ dateDep: infoRes.dateDep +' '+infoRes.tempsDep, dateRet: infoRes.dateRet + ' ' + infoRes.tempsRet, idVoiture: infocar.id, motDePasse: auth })
-
+            body: JSON.stringify({ 
+              dateDep: infoRes.dateDep +' '+infoRes.tempsDep,
+              dateRet: infoRes.dateRet + ' ' + infoRes.tempsRet,
+              idVoiture: infocar.id, motDePasse: auth,
+              lieuxDeLivraison: infoRes.depart,
+              lieuxDeRecuperation: infoRes.retour,
+             })
       };
-      console.log("reserver "+infoRes.dateDep + ' '+ infoRes.tempsDep + " " + infoRes.dateRet + ' ' + infoRes.tempsRet );
+
       const response = await fetch('http://localhost:3000/api/reservation/', requestOptions).catch(() => {
         setErreur({ isError: true, message:"erreur inconnue 1" });
       })
@@ -26,6 +31,10 @@ export default function CarReservation() {
         setErreur({ isError: true, message:"erreur inconnue 2" });
       })
       console.log("data ",data);
+      if(data.error == 'Invalid request!'){
+        setErreur({ isError: true, message:"mot de passe incorrecte" });
+        return alert('Invalid request!');
+      }
       if(data.error && data.code === 1){
         setErreur({ isError: true, message:"mot de passe incorrecte" });
         alert("mot de passe incorrecte ");
@@ -210,7 +219,7 @@ export default function CarReservation() {
                         <Row>
                         <Label> Options supplémentaires(Optionnel):</Label>
                         <Col style={{font:'20px librebaskerville'}}>
-                        <strong><Icon icon="icon-park-outline:gps" width="30" height="30"/> GPS </strong> <input type={'checkbox'}/>&ensp;&ensp;
+                        <strong><Icon icon="icon-park-outline:gps" width="30" height="30"/> GPS </strong> <input type={'checkbox'} />&ensp;&ensp;
                         <strong><Icon icon="mdi:car-child-seat" width="30" height="30" /> Siège enfant </strong> <input type={'checkbox'}/>&ensp;&ensp;
                         <strong><Icon icon="icon-park-outline:baby-car-seat" width="30" height="30" /> Siège bébé </strong> <input type={'checkbox'}/>&ensp;&ensp;
                         <strong><Icon icon="icon-park-outline:booster-car-seat" width="30" height="30" /> Rehausseur </strong> <input type={'checkbox'}/>
@@ -356,6 +365,7 @@ export default function CarReservation() {
           </Card>
         
         </Col>
+        {/************************************ c'est la carte voiture ******************************/}
         <Col>
 
           <Card style={{backgroundColor:'rgba(255,255,255,0.2)',width:'400px'}}>

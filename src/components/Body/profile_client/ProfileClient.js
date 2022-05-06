@@ -24,6 +24,7 @@ export default function ProfileClient() {
       reader.onload = () => {  
           setimgUpload(reader.result);
           /** ******* console ********** */
+          
           console.log(reader.result);     
       };
       reader.onerror = function (error) {
