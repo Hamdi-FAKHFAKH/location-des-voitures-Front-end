@@ -6,6 +6,7 @@ export default function CarReservation() {
   const [ auth, setAuth ] = useState("");
   const [ erreur, setErreur ] = useState({ isError: false, message:"" })
 
+/******************************************************requete backend -***************************** */
   async function reserver(){
     setvuehome();
       const requestOptions = {
@@ -47,7 +48,12 @@ export default function CarReservation() {
 
           // setVoitures(data) 
   }
+  /******************************************************************************************************* */
     const {setvuehome,infocar,infoRes,setinfoRes} = useContext(Carcontext);
+
+    /******************************* use state option ************************************************ */
+    const [option,setoption]=useState({option:'', SE:false , SB:false, GPS:false , R:false});
+    /*************************************************** use effect ************************************* */
     useEffect(()=>
     {
       setErreur(false);
@@ -336,18 +342,17 @@ export default function CarReservation() {
                     <Row>
                     <Col>
                     <Label> Options supplémentaires(Optionnel):</Label>  
-                    <Input type='textarea' rows='4' placeholder='saisie des option supplémentaire'/>
-                    {erreur? <span style={{ color: "red" }}> { erreur.message } </span> : null}
+                    <Input type='textarea' rows='4' placeholder='saisie des option supplémentaire' onChange={e=>{setoption({...option,option:e.target.value})}}/>
                     </Col>  
                     </Row>
                     <br/>
                     <Row>
                     <Label> Options supplémentaires(Optionnel):</Label>
                     <Col style={{font:'20px librebaskerville'}}>
-                    <strong><Icon icon="icon-park-outline:gps" width="30" height="30"/> GPS </strong> <input type={'checkbox'}/>&ensp;&ensp;
-                    <strong><Icon icon="mdi:car-child-seat" width="30" height="30" /> Siège enfant </strong> <input type={'checkbox'}/>&ensp;&ensp;
-                    <strong><Icon icon="icon-park-outline:baby-car-seat" width="30" height="30" /> Siège bébé </strong> <input type={'checkbox'}/>&ensp;&ensp;
-                    <strong><Icon icon="icon-park-outline:booster-car-seat" width="30" height="30" /> Rehausseur </strong> <input type={'checkbox'}/>
+                    <strong><Icon icon="icon-park-outline:gps" width="30" height="30"/> GPS </strong> <input type={'checkbox'} onChange={e=>{setoption({...option,GPS:e.target.checked})}}/>&ensp;&ensp;
+                    <strong><Icon icon="mdi:car-child-seat" width="30" height="30" /> Siège enfant </strong> <input type={'checkbox'}onChange={e=>{setoption({...option,SE:e.target.checked})}}/>&ensp;&ensp;
+                    <strong><Icon icon="icon-park-outline:baby-car-seat" width="30" height="30" /> Siège bébé </strong> <input type={'checkbox'}onChange={e=>{setoption({...option,SB:e.target.checked})}}/>&ensp;&ensp;
+                    <strong><Icon icon="icon-park-outline:booster-car-seat" width="30" height="30" /> Rehausseur </strong> <input type={'checkbox'}onChange={e=>{setoption({...option,R:e.target.checked});console.log(option);}}/>
                     </Col>  
                     </Row>
                     <br/>
